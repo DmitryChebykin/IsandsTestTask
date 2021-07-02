@@ -1,5 +1,7 @@
 package com.example.isandstesttask.entity;
 
+import com.example.isandstesttask.entity.reference.Brand;
+import com.example.isandstesttask.entity.reference.Color;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,7 +25,7 @@ public class BaseProduct extends BaseEntity {
 
     private boolean isOnlineOrdering;
     private boolean isSoldByInstallments;
-    private boolean isAvailable;
+    private boolean available;
     private String modelName;
     private String serialNumber;
 
@@ -41,7 +43,7 @@ public class BaseProduct extends BaseEntity {
         this.brandName = brandName;
         this.isOnlineOrdering = isOnlineOrdering;
         this.isSoldByInstallments = isSoldByInstallments;
-        this.isAvailable = isAvailable;
+        this.available = isAvailable;
         this.modelName = modelName;
         this.serialNumber = serialNumber;
         this.colorName = colorName;
@@ -57,7 +59,7 @@ public class BaseProduct extends BaseEntity {
         this.brandName = brandName;
         this.isOnlineOrdering = isOnlineOrdering;
         this.isSoldByInstallments = isSoldByInstallments;
-        this.isAvailable = isAvailable;
+        this.available = isAvailable;
         this.modelName = modelName;
         this.serialNumber = serialNumber;
         this.colorName = colorName;
