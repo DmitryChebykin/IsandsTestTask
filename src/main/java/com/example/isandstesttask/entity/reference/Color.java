@@ -1,5 +1,6 @@
-package com.example.isandstesttask.entity;
+package com.example.isandstesttask.entity.reference;
 
+import com.example.isandstesttask.entity.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
