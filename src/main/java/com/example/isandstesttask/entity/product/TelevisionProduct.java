@@ -1,5 +1,8 @@
-package com.example.isandstesttask.entity;
+package com.example.isandstesttask.entity.product;
 
+import com.example.isandstesttask.entity.BaseProduct;
+import com.example.isandstesttask.entity.reference.Brand;
+import com.example.isandstesttask.entity.reference.Color;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +23,7 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 public class TelevisionProduct extends BaseProduct {
+    public static final String PRODUCT_TYPE = "television";
     private String category;
     private String technology;
 
@@ -27,5 +31,6 @@ public class TelevisionProduct extends BaseProduct {
         super(id, createdDate, lastModifiedDate, productType, producingCountry, brandName, isOnlineOrdering, isSoldByInstallments, isAvailable, modelName, serialNumber, colorName, price, size, modelList);
         this.category = category;
         this.technology = technology;
+        this.setProductType(PRODUCT_TYPE);
     }
 }
