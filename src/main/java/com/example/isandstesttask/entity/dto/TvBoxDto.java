@@ -9,15 +9,13 @@ import java.util.UUID;
 
 @Setter
 @Getter
-public class TelevisionProductDto extends BaseProductDTO {
+public class TvBoxDto extends BaseProductDTO {
     private String category;
     private String technology;
 
-    public TelevisionProductDto(UUID id, String productType, String producingCountry, Brand brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, Color colorName, BigDecimal price, String size, String category, String technology) {
+    public TvBoxDto(UUID id, String productType, String producingCountry, Brand brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, Color colorName, BigDecimal price, String size, String category, String technology) {
         super(id, productType, producingCountry, brandName, isOnlineOrdering, isSoldByInstallments, isAvailable, modelName, serialNumber, colorName, price, size);
         this.category = category;
         this.technology = technology;
     }
-
-
 }

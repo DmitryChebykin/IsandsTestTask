@@ -20,11 +20,11 @@ public class GenericService {
     }
 
     public List<BaseProduct> getProductByModelName(String modelName)  {
-        return genericProductRepository.findAllByModelNameAllIgnoreCase(modelName).orElseThrow(() -> new ProductNotFoundException("Can't find products with model name: " + modelName));
+        return genericProductRepository.findAllByModelNameAllIgnoreCase(modelName).orElseThrow(() -> new ProductRequestException("Can't find products with model name: " + modelName));
     }
 
     public List<BaseProduct> getProductByProductType(String productType) {
         return genericProductRepository.findAllByProductType(productType)
-                .orElseThrow(() -> new ProductNotFoundException("Can't find products with product type: " + productType));
+                .orElseThrow(() -> new ProductRequestException("Can't find products with product type: " + productType));
     }
 }

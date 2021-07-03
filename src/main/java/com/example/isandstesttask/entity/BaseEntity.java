@@ -3,10 +3,7 @@ package com.example.isandstesttask.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.*;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public  class BaseEntity {
     @Id
+    @Generated(GenerationTime.INSERT)
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",

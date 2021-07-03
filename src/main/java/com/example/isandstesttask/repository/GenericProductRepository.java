@@ -1,7 +1,6 @@
 package com.example.isandstesttask.repository;
 
 import com.example.isandstesttask.entity.BaseProduct;
-import com.example.isandstesttask.entity.product.TelevisionProduct;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -11,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @NoRepositoryBean
-public interface GenericProductRepository<E extends BaseProduct> extends JpaRepository<E , UUID> {
+public interface GenericProductRepository<E extends BaseProduct> extends JpaRepository<E, UUID> {
     Optional<List<BaseProduct>> findAllByModelNameAllIgnoreCase(String modelName);
 
     Optional<List<BaseProduct>> findAllByProductType(String productType);
@@ -26,7 +25,5 @@ public interface GenericProductRepository<E extends BaseProduct> extends JpaRepo
 
     Optional<List<BaseProduct>> findByAvailableTrue();
 
-
-
-
+    Optional<BaseProduct> existsBySerialNumber(String serialNumber);
 }

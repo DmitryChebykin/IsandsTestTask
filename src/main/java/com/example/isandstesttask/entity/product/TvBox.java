@@ -22,12 +22,12 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-public class TelevisionProduct extends BaseProduct {
+public class TvBox extends BaseProduct {
     public static final String PRODUCT_TYPE = "television";
     private String category;
     private String technology;
 
-    public TelevisionProduct(UUID id, Timestamp createdDate, Timestamp lastModifiedDate, String productType, String producingCountry, Brand brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, Color colorName, BigDecimal price, String size, List<TelevisionProduct> modelList, String category, String technology) {
+    public TvBox(UUID id, Timestamp createdDate, Timestamp lastModifiedDate, String productType, String producingCountry, Brand brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, Color colorName, BigDecimal price, String size, List<TvBox> modelList, String category, String technology) {
         super(id, createdDate, lastModifiedDate, productType, producingCountry, brandName, isOnlineOrdering, isSoldByInstallments, isAvailable, modelName, serialNumber, colorName, price, size, modelList);
         this.category = category;
         this.technology = technology;
