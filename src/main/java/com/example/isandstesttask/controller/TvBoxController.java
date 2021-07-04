@@ -12,35 +12,37 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/product/tv")
 public class TvBoxController {
     private TvBoxService tvBoxService;
-    private GenericMapper<TvBox, TvBoxDto> tvBoxTvBoxDtoGenericMapper;
+    private GenericMapper<TvBox, TvBoxDto> tvBoxDtoGenericMapper;
 
     @Autowired
     public TvBoxController(TvBoxService tvBoxService, GenericMapper<TvBox, TvBoxDto> televisionProductMapper) {
         this.tvBoxService = tvBoxService;
-        this.tvBoxTvBoxDtoGenericMapper = televisionProductMapper;
+        this.tvBoxDtoGenericMapper = televisionProductMapper;
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
     ResponseEntity<TvBox> createTV(@RequestBody TvBoxDto tvBoxDto) {
-        String id = tvBoxService.createTelevisionProduct(tvBoxTvBoxDtoGenericMapper.asEntity(tvBoxDto)).toString();
-        return new ResponseEntity<>(tvBoxService.getProductById(id), HttpStatus.CREATED);
+        String id = tvBoxService.createTvBox(tvBoxDtoGenericMapper.asEntity(tvBoxDto));
+        TvBox tvBox = tvBoxService.getProductById(id);
+        System.out.println(tvBox);
+        return new ResponseEntity<>(tvBox, HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/filter")
-    ResponseEntity<String> getFilteredTvBox(@RequestParam TvBoxFilterDto tvBoxFilterDto) {
+    @GetMapping
+    ResponseEntity<List<TvBox>> getFilteredTvBox(TvBoxFilterDto tvBoxFilterDto) {
         ObjectMapper mapper = new ObjectMapper();
         Map<String, Object> map =
                 mapper.convertValue(tvBoxFilterDto, new TypeReference<Map<String, Object>>() {
                 });
-        System.out.println();
+        List<TvBox> tvBoxes = tvBoxService.getAll();
 
-        return new ResponseEntity<>(map.toString(), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(tvBoxes, HttpStatus.ACCEPTED);
     }
 }

@@ -5,10 +5,12 @@ import com.example.isandstesttask.entity.reference.Color;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.UUID;
 
 @MappedSuperclass
@@ -20,51 +22,52 @@ public class BaseProduct extends BaseEntity {
     private String producingCountry;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn (name="brands_id")
+    @JoinColumn(name = "brands_id")
     private Brand brandName;
 
-    private boolean isOnlineOrdering;
-    private boolean isSoldByInstallments;
-    private boolean available;
+    private Boolean isOnlineOrdering;
+    private Boolean isSoldByInstallments;
+    private Boolean available;
     private String modelName;
     private String serialNumber;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn (name="colors_id")
+    @JoinColumn(name = "colors_id")
     private Color colorName;
 
     private BigDecimal price;
     private String size;
-    @Transient
-    private List<? extends BaseProduct> modelList;
-    public BaseProduct(String productType, String producingCountry, Brand brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, Color colorName, BigDecimal price, String size, List<? extends BaseProduct> modelList) {
+
+    public BaseProduct(Timestamp createdDate, Timestamp lastModifiedDate, String productType, String producingCountry, Brand brandName, Boolean isOnlineOrdering, Boolean isSoldByInstallments, Boolean available, String modelName, String serialNumber, Color colorName, BigDecimal price, String size) {
+        super(createdDate, lastModifiedDate);
         this.productType = productType;
         this.producingCountry = producingCountry;
         this.brandName = brandName;
         this.isOnlineOrdering = isOnlineOrdering;
         this.isSoldByInstallments = isSoldByInstallments;
-        this.available = isAvailable;
+        this.available = available;
         this.modelName = modelName;
         this.serialNumber = serialNumber;
         this.colorName = colorName;
         this.price = price;
         this.size = size;
-        this.modelList = modelList;
     }
 
-    public BaseProduct(UUID id, Timestamp createdDate, Timestamp lastModifiedDate, String productType, String producingCountry, Brand brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, Color colorName, BigDecimal price, String size, List<? extends BaseProduct> modelList) {
-        super(id, createdDate, lastModifiedDate);
-        this.productType = productType;
-        this.producingCountry = producingCountry;
-        this.brandName = brandName;
-        this.isOnlineOrdering = isOnlineOrdering;
-        this.isSoldByInstallments = isSoldByInstallments;
-        this.available = isAvailable;
-        this.modelName = modelName;
-        this.serialNumber = serialNumber;
-        this.colorName = colorName;
-        this.price = price;
-        this.size = size;
-        this.modelList = modelList;
+    @Override
+    public String toString() {
+        return "BaseProduct{" +
+                "id=" + id +
+                ", productType='" + productType + '\'' +
+                ", producingCountry='" + producingCountry + '\'' +
+                ", brandName=" + brandName +
+                ", isOnlineOrdering=" + isOnlineOrdering +
+                ", isSoldByInstallments=" + isSoldByInstallments +
+                ", available=" + available +
+                ", modelName='" + modelName + '\'' +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", colorName=" + colorName +
+                ", price=" + price +
+                ", size='" + size + '\'' +
+                "} " + super.toString();
     }
 }

@@ -1,55 +1,66 @@
 package com.example.isandstesttask.service;
 
-import com.example.isandstesttask.entity.BaseProduct;
-import com.example.isandstesttask.entity.dto.TvBoxFilterDto;
 import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.reference.Brand;
+import com.example.isandstesttask.entity.reference.Color;
+import com.example.isandstesttask.repository.BrandRepository;
+import com.example.isandstesttask.repository.ColorRepository;
 import com.example.isandstesttask.repository.TvBoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import static com.example.isandstesttask.entity.product.TvBox.PRODUCT_TYPE;
 
 @Service
-public class TvBoxService extends GenericService {
+public class TvBoxService {
 
     private TvBoxRepository tvBoxRepository;
+    private BrandRepository brandRepository;
+    private ColorRepository colorRepository;
 
     @Autowired
-    public TvBoxService(TvBoxRepository tvBoxRepository) {
-        super();
+    public TvBoxService(TvBoxRepository tvBoxRepository, BrandRepository brandRepository, ColorRepository colorRepository) {
         this.tvBoxRepository = tvBoxRepository;
+        this.brandRepository = brandRepository;
+        this.colorRepository = colorRepository;
     }
 
-    public List<BaseProduct> getProductByProductType(String productType) {
-        return tvBoxRepository.findAllByProductType(productType)
-                .orElseThrow(() -> new ProductRequestException("Can't find products with product type: " + productType));
-    }
+    @Transactional
+    public String createTvBox(TvBox tvBox) {
+        Optional<TvBox> optionalTvBoxes = tvBoxRepository.findBySerialNumber(tvBox.getSerialNumber());
 
-    public UUID createTelevisionProduct(TvBox televisionProduct) {
-        Optional<BaseProduct> optional = tvBoxRepository.existsBySerialNumber(televisionProduct.getSerialNumber());
-
-        if (optional.isPresent()) {
-            return optional.get().getId();
+        if (optionalTvBoxes.isPresent()) {
+            return optionalTvBoxes.get().getId().toString();
         }
 
-        return tvBoxRepository.save(televisionProduct).getId();
-    }
+        Optional<Brand> optionalBrand = brandRepository.findByBrandName(tvBox.getBrandName().getBrandName());
 
-    public boolean isTelevisionProductExistsByModelNameAndSAndSerialNumber(String modelName, String serialNumber) {
-        return tvBoxRepository.existsByModelNameAndSerialNumber(modelName, serialNumber).isPresent();
-    }
+        optionalBrand.ifPresent(tvBox::setBrandName);
 
-    public TvBox getTelevisionProductBySerialNumber(String serialNumber) {
-        List<BaseProduct> productList = tvBoxRepository.findBySerialNumber(serialNumber).orElseThrow(() -> new ProductRequestException("Can't find products with product type: " + serialNumber));
-        return (TvBox) productList.stream().filter(baseProduct -> baseProduct.getProductType().equals(PRODUCT_TYPE));
+        Optional<Color> optionalColor = colorRepository.findColorByColorName(tvBox.getColorName().getColorName());
+
+        optionalColor.ifPresent(tvBox::setColorName);
+
+        tvBox.setProductType(TvBox.PRODUCT_TYPE);
+
+        return tvBoxRepository.save(tvBox).getId().toString();
     }
 
     public TvBox getProductById(String id) {
         return tvBoxRepository.getById(UUID.fromString(id));
     }
 
+    public List<TvBox> getAll() {
+        return tvBoxRepository.findAll();
+    }
 
+    public boolean isTvBoxExistsByModelNameAndSAndSerialNumber(String modelName, String serialNumber) {
+        return tvBoxRepository.findBySerialNumberAndModelName(serialNumber, modelName).isPresent();
+    }
+
+    public TvBox getTvBoxBySerialNumber(String serialNumber) {
+        return tvBoxRepository.findBySerialNumber(serialNumber).orElseThrow(() -> new ProductRequestException("Not found product with serial : " + serialNumber));
+    }
 }

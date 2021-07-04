@@ -1,10 +1,5 @@
 package com.example.isandstesttask.entity.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class BaseProductFilterDto {
     private String id;
     private String producingCountry;
@@ -34,6 +29,102 @@ public class BaseProductFilterDto {
         this.colorName = colorName;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
+        this.size = size;
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getProducingCountry() {
+        return this.producingCountry;
+    }
+
+    public String getBrandName() {
+        return this.brandName;
+    }
+
+    public boolean isOnlineOrdering() {
+        return this.isOnlineOrdering;
+    }
+
+    public boolean isSoldByInstallments() {
+        return this.isSoldByInstallments;
+    }
+
+    public boolean isAvailable() {
+        return this.isAvailable;
+    }
+
+    public String getModelName() {
+        return this.modelName;
+    }
+
+    public String getSerialNumber() {
+        return this.serialNumber;
+    }
+
+    public String getColorName() {
+        return this.colorName;
+    }
+
+    public String getMaxPrice() {
+        return this.maxPrice;
+    }
+
+    public String getMinPrice() {
+        return this.minPrice;
+    }
+
+    public String getSize() {
+        return this.size;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setProducingCountry(String producingCountry) {
+        this.producingCountry = producingCountry;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public void setOnlineOrdering(boolean isOnlineOrdering) {
+        this.isOnlineOrdering = isOnlineOrdering;
+    }
+
+    public void setSoldByInstallments(boolean isSoldByInstallments) {
+        this.isSoldByInstallments = isSoldByInstallments;
+    }
+
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
+
+    public void setMaxPrice(String maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public void setMinPrice(String minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public void setSize(String size) {
         this.size = size;
     }
 }

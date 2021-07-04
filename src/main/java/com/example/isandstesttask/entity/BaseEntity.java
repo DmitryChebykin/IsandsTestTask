@@ -35,7 +35,7 @@ public  class BaseEntity {
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 
-    public BaseEntity(UUID id, Timestamp createdDate, Timestamp lastModifiedDate) {
+    public BaseEntity(Timestamp createdDate, Timestamp lastModifiedDate) {
         this.id = id;
         this.createdDate = createdDate;
         this.lastModifiedDate = lastModifiedDate;
