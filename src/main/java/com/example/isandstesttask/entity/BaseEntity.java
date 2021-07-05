@@ -1,5 +1,6 @@
 package com.example.isandstesttask.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-public  class BaseEntity {
+public class BaseEntity {
     @Id
     @Generated(GenerationTime.INSERT)
     @GeneratedValue(generator = "UUID")
@@ -28,10 +29,12 @@ public  class BaseEntity {
     @Getter
     UUID id;
 
+    @JsonIgnore
     @CreationTimestamp
     @Column(updatable = false)
     private Timestamp createdDate;
 
+    @JsonIgnore
     @UpdateTimestamp
     private Timestamp lastModifiedDate;
 

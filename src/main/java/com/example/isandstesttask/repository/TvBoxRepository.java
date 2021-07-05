@@ -15,4 +15,6 @@ public interface TvBoxRepository extends GenericProductRepository<TvBox> {
     List<TvBox> findAll(@Nullable Specification<TvBox> spec);
 
     Optional<TvBox> findById(UUID id);
+
+    Optional<List<TvBox>> findByAvailableTrue();
 }

@@ -26,6 +26,10 @@ public class TvBoxService {
         this.brandRepository = brandRepository;
         this.colorRepository = colorRepository;
     }
+    @Transactional
+    public String save(TvBox tvBox) {
+        return tvBoxRepository.save(tvBox).getId().toString();
+    }
 
     @Transactional
     public String createTvBox(TvBox tvBox) {

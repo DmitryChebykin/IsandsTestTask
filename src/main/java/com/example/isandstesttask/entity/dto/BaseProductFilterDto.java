@@ -1,5 +1,8 @@
 package com.example.isandstesttask.entity.dto;
 
+import com.example.isandstesttask.entity.product.TvBox;
+import java.util.List;
+
 public class BaseProductFilterDto {
     private String id;
     private String producingCountry;
@@ -13,11 +16,12 @@ public class BaseProductFilterDto {
     private String maxPrice;
     private String minPrice;
     private String size;
+    private List<TvBox> tvBoxes;
 
     public BaseProductFilterDto() {
     }
 
-    public BaseProductFilterDto(String id, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, String maxPrice, String minPrice, String size) {
+    public BaseProductFilterDto(String id, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, String maxPrice, String minPrice, String size, List<TvBox> tvBoxes) {
         this.id = id;
         this.producingCountry = producingCountry;
         this.brandName = brandName;
@@ -30,101 +34,98 @@ public class BaseProductFilterDto {
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
         this.size = size;
+        this.tvBoxes = tvBoxes;
     }
 
-    public String getId() {
-        return this.id;
-    }
+    public static final class BaseProductFilterDtoBuilder {
+        private String id;
+        private String producingCountry;
+        private String brandName;
+        private boolean isOnlineOrdering;
+        private boolean isSoldByInstallments;
+        private boolean isAvailable;
+        private String modelName;
+        private String serialNumber;
+        private String colorName;
+        private String maxPrice;
+        private String minPrice;
+        private String size;
+        private List<TvBox> tvBoxes;
 
-    public String getProducingCountry() {
-        return this.producingCountry;
-    }
+        private BaseProductFilterDtoBuilder() {
+        }
 
-    public String getBrandName() {
-        return this.brandName;
-    }
+        public static BaseProductFilterDtoBuilder aBaseProductFilterDto() {
+            return new BaseProductFilterDtoBuilder();
+        }
 
-    public boolean isOnlineOrdering() {
-        return this.isOnlineOrdering;
-    }
+        public BaseProductFilterDtoBuilder id(String id) {
+            this.id = id;
+            return this;
+        }
 
-    public boolean isSoldByInstallments() {
-        return this.isSoldByInstallments;
-    }
+        public BaseProductFilterDtoBuilder producingCountry(String producingCountry) {
+            this.producingCountry = producingCountry;
+            return this;
+        }
 
-    public boolean isAvailable() {
-        return this.isAvailable;
-    }
+        public BaseProductFilterDtoBuilder brandName(String brandName) {
+            this.brandName = brandName;
+            return this;
+        }
 
-    public String getModelName() {
-        return this.modelName;
-    }
+        public BaseProductFilterDtoBuilder isOnlineOrdering(boolean isOnlineOrdering) {
+            this.isOnlineOrdering = isOnlineOrdering;
+            return this;
+        }
 
-    public String getSerialNumber() {
-        return this.serialNumber;
-    }
+        public BaseProductFilterDtoBuilder isSoldByInstallments(boolean isSoldByInstallments) {
+            this.isSoldByInstallments = isSoldByInstallments;
+            return this;
+        }
 
-    public String getColorName() {
-        return this.colorName;
-    }
+        public BaseProductFilterDtoBuilder isAvailable(boolean isAvailable) {
+            this.isAvailable = isAvailable;
+            return this;
+        }
 
-    public String getMaxPrice() {
-        return this.maxPrice;
-    }
+        public BaseProductFilterDtoBuilder modelName(String modelName) {
+            this.modelName = modelName;
+            return this;
+        }
 
-    public String getMinPrice() {
-        return this.minPrice;
-    }
+        public BaseProductFilterDtoBuilder serialNumber(String serialNumber) {
+            this.serialNumber = serialNumber;
+            return this;
+        }
 
-    public String getSize() {
-        return this.size;
-    }
+        public BaseProductFilterDtoBuilder colorName(String colorName) {
+            this.colorName = colorName;
+            return this;
+        }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+        public BaseProductFilterDtoBuilder maxPrice(String maxPrice) {
+            this.maxPrice = maxPrice;
+            return this;
+        }
 
-    public void setProducingCountry(String producingCountry) {
-        this.producingCountry = producingCountry;
-    }
+        public BaseProductFilterDtoBuilder minPrice(String minPrice) {
+            this.minPrice = minPrice;
+            return this;
+        }
 
-    public void setBrandName(String brandName) {
-        this.brandName = brandName;
-    }
+        public BaseProductFilterDtoBuilder size(String size) {
+            this.size = size;
+            return this;
+        }
 
-    public void setOnlineOrdering(boolean isOnlineOrdering) {
-        this.isOnlineOrdering = isOnlineOrdering;
-    }
+        public BaseProductFilterDtoBuilder tvBoxes(List<TvBox> tvBoxes) {
+            this.tvBoxes = tvBoxes;
+            return this;
+        }
 
-    public void setSoldByInstallments(boolean isSoldByInstallments) {
-        this.isSoldByInstallments = isSoldByInstallments;
-    }
-
-    public void setAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
-    }
-
-    public void setModelName(String modelName) {
-        this.modelName = modelName;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
-
-    public void setMaxPrice(String maxPrice) {
-        this.maxPrice = maxPrice;
-    }
-
-    public void setMinPrice(String minPrice) {
-        this.minPrice = minPrice;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
+        public BaseProductFilterDto build() {
+            return new BaseProductFilterDto(id, producingCountry, brandName, isOnlineOrdering, isSoldByInstallments, isAvailable, modelName, serialNumber, colorName, maxPrice, minPrice, size, tvBoxes);
+        }
     }
 }

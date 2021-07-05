@@ -16,4 +16,7 @@ public class TvBoxDto extends BaseProductDTO {
         this.category = category;
         this.technology = technology;
     }
+
+    public TvBoxDto() {
+    }
 }

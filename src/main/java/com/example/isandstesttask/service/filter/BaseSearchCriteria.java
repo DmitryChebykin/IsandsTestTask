@@ -2,8 +2,12 @@ package com.example.isandstesttask.service.filter;
 
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -11,16 +15,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BaseSearchCriteria {
-    private UUID id;
-    private String producingCountry;
-    private Brand brandName;
-    private boolean isOnlineOrdering;
-    private boolean isSoldByInstallments;
-    private boolean isAvailable;
-    private String modelName;
-    private String serialNumber;
-    private Color colorName;
-    private BigDecimal maxPrice;
-    private BigDecimal minPrice;
-    private String size;
+    private Optional<UUID> id;
+    private Optional<String> producingCountry;
+    private Optional<Brand> brandName;
+    private Optional<Boolean> isOnlineOrdering;
+    private Optional<Boolean> isSoldByInstallments;
+    private Optional<Boolean> isAvailable;
+    private Optional<String> modelName;
+    private Optional<String> serialNumber;
+    private Optional<Color> colorName;
+    private Optional<BigDecimal> maxPrice;
+    private Optional<BigDecimal> minPrice;
+    private Optional<String> size;
 }
