@@ -45,7 +45,8 @@ public final class TvBoxSpecification {
     }
 
     private static Specification<TvBox> modelIs(Optional<String> modelName) {
-        return (root, query, builder) -> modelName.map(newModel -> builder.equal(root.get(TvBox_.MODEL_NAME), newModel)).orElse(null);
+        return (root, query, builder) -> modelName.map(newModel -> builder.equal(
+                builder.lower(root.get(TvBox_.MODEL_NAME)), newModel.toLowerCase())).orElse(null);
     }
 
     private static Specification<TvBox> serialIs(Optional<String> serial) {

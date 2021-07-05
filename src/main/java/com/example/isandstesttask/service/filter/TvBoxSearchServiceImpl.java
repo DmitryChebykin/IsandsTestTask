@@ -3,6 +3,7 @@ package com.example.isandstesttask.service.filter;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.repository.TvBoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,7 +18,14 @@ public class TvBoxSearchServiceImpl implements TvBoxSearchService {
     @Override
     public List<TvBox> searchTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
         Specification<TvBox> tvBoxSpecification = TvBoxSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        return tvBoxRepository.findAll(tvBoxSpecification);
+
+        Sort.TypedSort<TvBox> tvBoxTypedSort = Sort.sort(TvBox.class);
+
+        Sort sort = tvBoxTypedSort
+                .by(TvBox::getModelName).ascending()
+                .and(tvBoxTypedSort.by(TvBox::getPrice).descending());
+
+        return tvBoxRepository.findAll(tvBoxSpecification, sort);
     }
 
     @Override
