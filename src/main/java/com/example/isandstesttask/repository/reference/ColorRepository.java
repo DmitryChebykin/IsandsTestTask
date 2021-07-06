@@ -1,4 +1,4 @@
-package com.example.isandstesttask.repository;
+package com.example.isandstesttask.repository.reference;
 
 import com.example.isandstesttask.entity.reference.Color;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,5 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ColorRepository extends JpaRepository<Color, UUID> {
-    Optional<Color> findColorByColorName(String brandName);
+    Optional<Color> findByColorName(String colorName);
 }

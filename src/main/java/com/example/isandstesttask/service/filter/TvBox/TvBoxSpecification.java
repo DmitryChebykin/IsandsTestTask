@@ -1,4 +1,4 @@
-package com.example.isandstesttask.service.filter;
+package com.example.isandstesttask.service.filter.TvBox;
 
 import com.example.isandstesttask.entity.metamodel.TvBox_;
 import com.example.isandstesttask.entity.product.TvBox;

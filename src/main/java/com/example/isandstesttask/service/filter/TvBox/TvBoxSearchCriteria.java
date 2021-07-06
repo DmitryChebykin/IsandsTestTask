@@ -1,7 +1,8 @@
-package com.example.isandstesttask.service.filter;
+package com.example.isandstesttask.service.filter.TvBox;
 
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
+import com.example.isandstesttask.service.filter.BaseSearchCriteria;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

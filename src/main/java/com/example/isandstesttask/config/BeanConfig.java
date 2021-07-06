@@ -1,7 +1,7 @@
 package com.example.isandstesttask.config;
 
-import com.example.isandstesttask.entity.dto.TvBoxDto;
-import com.example.isandstesttask.service.filter.TvBoxSearchServiceImpl;
+import com.example.isandstesttask.entity.dto.create.TvBoxDto;
+import com.example.isandstesttask.service.filter.TvBox.TvBoxSearchServiceImpl;
 import net.minidev.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;

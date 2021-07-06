@@ -1,6 +1,7 @@
-package com.example.isandstesttask.repository;
+package com.example.isandstesttask.repository.reference;
 
 import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.repository.GenericProductRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
@@ -16,7 +17,8 @@ public interface TvBoxRepository extends GenericProductRepository<TvBox> {
     Optional<TvBox> findBySerialNumberAndModelName(String serialNumber, String modelName);
 
     List<TvBox> findAll(@Nullable Specification<TvBox> spec);
-    List<TvBox> findAll(@Nullable Specification <TvBox> spec, Sort sort);
+
+    List<TvBox> findAll(@Nullable Specification<TvBox> spec, Sort sort);
 
     Optional<TvBox> findById(UUID id);
 

@@ -1,6 +1,6 @@
 package com.example.isandstesttask.entity.mapper;
 
-import com.example.isandstesttask.entity.dto.TvBoxDto;
+import com.example.isandstesttask.entity.dto.create.TvBoxDto;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
@@ -15,6 +15,7 @@ public class TvBoxMapper implements GenericMapper<TvBox, TvBoxDto> {
     private ModelMapper modelMapper;
     private TvBoxService tvBoxService;
 
+
     public TvBoxMapper() {
     }
 
@@ -26,12 +27,6 @@ public class TvBoxMapper implements GenericMapper<TvBox, TvBoxDto> {
 
     public TvBox asEntity(TvBoxDto tvBoxDto) {
         TvBox tvBox = modelMapper.map(tvBoxDto, TvBox.class);
-
-        if (tvBoxDto.getId() == null) {
-            if (tvBoxService.isTvBoxExistsByModelNameAndSAndSerialNumber(tvBoxDto.getModelName(), tvBoxDto.getSerialNumber())) {
-                tvBox.setId(tvBoxService.getTvBoxBySerialNumber(tvBoxDto.getSerialNumber()).getId());
-            }
-        }
 
         tvBox.setProductType(PRODUCT_TYPE);
 

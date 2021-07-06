@@ -15,11 +15,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class DbCsvInit {
 
-     TvBoxService tvBoxService;
+     private TvBoxService tvBoxService;
 
     @Autowired
     public DbCsvInit(TvBoxService tvBoxService) {
@@ -28,11 +29,11 @@ public class DbCsvInit {
 
     @EventListener
     public void postConstruct(ApplicationReadyEvent event) {
-        String[] CSV_COLUMNS = new String[11];
+        String[] CSV_COLUMNS;
 
 
         ClassLoader loader = DbCsvInit.class.getClassLoader();
-        File file = new File(loader.getResource("static/tvBox.csv").getFile());
+        File file = new File(Objects.requireNonNull(loader.getResource("static/tvBox.csv")).getFile());
 
         CSVReader csvReader;
         List<String[]> csvLines = null;
