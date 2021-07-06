@@ -19,7 +19,7 @@ import java.util.List;
 @Component
 public class DbCsvInit {
 
-     TvBoxService tvBoxService;
+    TvBoxService tvBoxService;
 
     @Autowired
     public DbCsvInit(TvBoxService tvBoxService) {
@@ -29,7 +29,6 @@ public class DbCsvInit {
     @EventListener
     public void postConstruct(ApplicationReadyEvent event) {
         String[] CSV_COLUMNS = new String[11];
-
 
         ClassLoader loader = DbCsvInit.class.getClassLoader();
         File file = new File(loader.getResource("static/tvBox.csv").getFile());
@@ -46,7 +45,6 @@ public class DbCsvInit {
 
         if (csvLines != null) {
             for (int i = 1; i < csvLines.size(); i++) {
-//            for (int i = 1; i < 500; i++) {
                 CSV_COLUMNS = csvLines.get(i)[0].split(";");
 
                 String CATEGORY = CSV_COLUMNS[0];
@@ -62,6 +60,7 @@ public class DbCsvInit {
 
                 Brand brand = Brand.BrandBuilder.aBrand().brandName(CSV_COLUMNS[3]).build();
                 Color color = Color.ColorBuilder.aColor().withColorName(CSV_COLUMNS[7]).build();
+
                 TvBox tvBox = TvBox.TvBoxBuilder.aTvBox()
                         .category(CATEGORY)
                         .technology(TECHNOLOGY)

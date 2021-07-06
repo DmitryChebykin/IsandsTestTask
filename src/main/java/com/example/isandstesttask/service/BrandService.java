@@ -1,7 +1,7 @@
 package com.example.isandstesttask.service;
 
 import com.example.isandstesttask.entity.reference.Brand;
-import com.example.isandstesttask.repository.BrandRepository;
+import com.example.isandstesttask.repository.reference.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

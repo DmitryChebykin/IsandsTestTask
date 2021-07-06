@@ -16,7 +16,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-public class BaseEntity {
+public class BaseEntity implements DBField {
     @Id
     @Generated(GenerationTime.INSERT)
     @GeneratedValue(generator = "UUID")

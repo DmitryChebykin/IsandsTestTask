@@ -1,6 +1,6 @@
 package com.example.isandstesttask.controller;
 
-import com.example.isandstesttask.entity.dto.TvBoxDto;
+import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.entity.mapper.GenericMapper;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
@@ -23,13 +23,13 @@ import java.util.Optional;
 @RequestMapping("/product/tv")
 public class TvBoxController {
     private TvBoxService tvBoxService;
-    private GenericMapper<TvBox, TvBoxDto> tvBoxDtoGenericMapper;
+    private GenericMapper<TvBox, TvBoxResponseDtoImpl> tvBoxDtoGenericMapper;
     private BrandService brandService;
     private TvBoxSearchService tvBoxSearchService;
     private ColorService colorService;
 
     @Autowired
-    public TvBoxController(TvBoxService tvBoxService, GenericMapper<TvBox, TvBoxDto> tvBoxDtoGenericMapper, BrandService brandService, TvBoxSearchService tvBoxSearchService, ColorService colorService) {
+    public TvBoxController(TvBoxService tvBoxService, GenericMapper<TvBox, TvBoxResponseDtoImpl> tvBoxDtoGenericMapper, BrandService brandService, TvBoxSearchService tvBoxSearchService, ColorService colorService) {
         this.tvBoxService = tvBoxService;
         this.tvBoxDtoGenericMapper = tvBoxDtoGenericMapper;
         this.brandService = brandService;
@@ -40,7 +40,7 @@ public class TvBoxController {
 
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<TvBox> createTV(@RequestBody TvBoxDto tvBoxDto) {
+    ResponseEntity<TvBox> createTV(@RequestBody TvBoxResponseDtoImpl tvBoxDto) {
         String id = tvBoxService.createTvBox(tvBoxDtoGenericMapper.asEntity(tvBoxDto));
         TvBox tvBox = tvBoxService.getProductById(id);
         System.out.println(tvBox);
@@ -78,4 +78,8 @@ public class TvBoxController {
 
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<String> getFilteredTvBox(@RequestParam TvBoxResponseDtoImpl tvBoxResponseDto){
+        return new ResponseEntity<>("JR", HttpStatus.OK);}
 }

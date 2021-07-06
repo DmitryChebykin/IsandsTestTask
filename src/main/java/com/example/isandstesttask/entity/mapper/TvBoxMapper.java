@@ -1,6 +1,6 @@
 package com.example.isandstesttask.entity.mapper;
 
-import com.example.isandstesttask.entity.dto.TvBoxDto;
+import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import static com.example.isandstesttask.entity.product.TvBox.PRODUCT_TYPE;
 
 @Component
-public class TvBoxMapper implements GenericMapper<TvBox, TvBoxDto> {
+public class TvBoxMapper implements GenericMapper<TvBox, TvBoxResponseDtoImpl> {
     private ModelMapper modelMapper;
     private TvBoxService tvBoxService;
 
@@ -24,7 +24,7 @@ public class TvBoxMapper implements GenericMapper<TvBox, TvBoxDto> {
         this.tvBoxService = tvBoxService;
     }
 
-    public TvBox asEntity(TvBoxDto tvBoxDto) {
+    public TvBox asEntity(TvBoxResponseDtoImpl tvBoxDto) {
         TvBox tvBox = modelMapper.map(tvBoxDto, TvBox.class);
 
         if (tvBoxDto.getId() == null) {
@@ -46,10 +46,10 @@ public class TvBoxMapper implements GenericMapper<TvBox, TvBoxDto> {
         return tvBox;
     }
 
-    public TvBoxDto asDTO(TvBox tvBox) {
-        TvBoxDto tvBoxDto = modelMapper.map(tvBox, TvBoxDto.class);
+    public TvBoxResponseDtoImpl asDTO(TvBox tvBox) {
+        TvBoxResponseDtoImpl tvBoxDto = modelMapper.map(tvBox, TvBoxResponseDtoImpl.class);
         tvBoxDto.setBrandName(tvBox.getBrandName().getBrandName());
         tvBoxDto.setColorName(tvBox.getColorName().getColorName());
-        return modelMapper.map(tvBox, TvBoxDto.class);
+        return modelMapper.map(tvBox, TvBoxResponseDtoImpl.class);
     }
 }

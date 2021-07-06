@@ -1,7 +1,7 @@
 package com.example.isandstesttask.service.filter;
 
 import com.example.isandstesttask.entity.product.TvBox;
-import com.example.isandstesttask.repository.TvBoxRepository;
+import com.example.isandstesttask.repository.entity.TvBoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;

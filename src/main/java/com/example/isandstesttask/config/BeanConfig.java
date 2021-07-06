@@ -1,6 +1,6 @@
 package com.example.isandstesttask.config;
 
-import com.example.isandstesttask.entity.dto.TvBoxDto;
+import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.service.filter.TvBoxSearchServiceImpl;
 import net.minidev.json.JSONObject;
 import org.modelmapper.ModelMapper;
@@ -21,8 +21,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public TvBoxDto tvBoxDto() {
-        return new TvBoxDto();
+    public TvBoxResponseDtoImpl tvBoxDto() {
+        return new TvBoxResponseDtoImpl();
     }
 
     @Bean

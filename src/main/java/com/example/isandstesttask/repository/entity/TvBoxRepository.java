@@ -1,6 +1,7 @@
-package com.example.isandstesttask.repository;
+package com.example.isandstesttask.repository.entity;
 
 import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.repository.GenericProductRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.Nullable;
@@ -10,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface TvBoxRepository extends GenericProductRepository<TvBox> {
+public interface TvBoxRepository  extends GenericProductRepository<TvBox> {
     Optional<TvBox> findBySerialNumber(String serialNumber);
 
     Optional<TvBox> findBySerialNumberAndModelName(String serialNumber, String modelName);

@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Map;
 import java.util.UUID;
 
 @Entity
@@ -18,7 +19,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-public class TvBox extends BaseProduct {
+public class TvBox extends AbstractProduct implements Product {
     public static final String PRODUCT_TYPE = "television";
     private String category;
     private String technology;
@@ -37,8 +38,134 @@ public class TvBox extends BaseProduct {
                 "} " + super.toString();
     }
 
+
+
+    @Override
+    public void setProductType(String productType) {
+
+    }
+
+    @Override
+    public void setProducingCountry(String producingCountry) {
+
+    }
+
+    @Override
+    public void setBrandName(Brand brandName) {
+
+    }
+
+    @Override
+    public void setIsOnlineOrdering(Boolean isOnlineOrdering) {
+
+    }
+
+    @Override
+    public void setIsSoldByInstallments(Boolean isSoldByInstallments) {
+
+    }
+
+    @Override
+    public void setAvailable(Boolean available) {
+
+    }
+
+    @Override
+    public void setModelName(String modelName) {
+
+    }
+
+    @Override
+    public void setSerialNumber(String serialNumber) {
+
+    }
+
+    @Override
+    public void setColorName(Color colorName) {
+
+    }
+
+    @Override
+    public void setPrice(BigDecimal price) {
+
+    }
+
+    @Override
+    public void setSize(String size) {
+
+    }
+
+    @Override
+    public String getProductType() {
+        return null;
+    }
+
+    @Override
+    public String getProducingCountry() {
+        return null;
+    }
+
+    @Override
+    public Brand getBrandName() {
+        return null;
+    }
+
+    @Override
+    public Boolean getIsOnlineOrdering() {
+        return null;
+    }
+
+    @Override
+    public Boolean getIsSoldByInstallments() {
+        return null;
+    }
+
+    @Override
+    public Boolean getAvailable() {
+        return null;
+    }
+
+    @Override
+    public String getModelName() {
+        return null;
+    }
+
+    @Override
+    public String getSerialNumber() {
+        return null;
+    }
+
+    @Override
+    public Color getColorName() {
+        return null;
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        return null;
+    }
+
+    @Override
+    public String getSize() {
+        return null;
+    }
+
+    @Override
+    public UUID getId() {
+        return null;
+    }
+
+    @Override
+    public void setId(UUID id) {
+
+    }
+
+    @Override
+    public Map<String, String> getProperties() {
+        return null;
+    }
+
     public static final class TvBoxBuilder {
-        public static String PRODUCT_TYPE = "television";
         private Timestamp createdDate;
         private Timestamp lastModifiedDate;
         private String productType;
@@ -61,7 +188,6 @@ public class TvBox extends BaseProduct {
         public static TvBoxBuilder aTvBox() {
             return new TvBoxBuilder();
         }
-
 
         public TvBoxBuilder createdDate(Timestamp createdDate) {
             this.createdDate = createdDate;
@@ -128,11 +254,6 @@ public class TvBox extends BaseProduct {
             return this;
         }
 
-        public TvBoxBuilder PRODUCT_TYPE(String PRODUCT_TYPE) {
-            this.PRODUCT_TYPE = PRODUCT_TYPE;
-            return this;
-        }
-
         public TvBoxBuilder category(String category) {
             this.category = category;
             return this;
@@ -144,7 +265,7 @@ public class TvBox extends BaseProduct {
         }
 
         public TvBoxBuilder but() {
-            return aTvBox().createdDate(createdDate).lastModifiedDate(lastModifiedDate).productType(productType).producingCountry(producingCountry).brandName(brandName).isOnlineOrdering(isOnlineOrdering).isSoldByInstallments(isSoldByInstallments).available(available).modelName(modelName).serialNumber(serialNumber).colorName(colorName).price(price).size(size).PRODUCT_TYPE(PRODUCT_TYPE).category(category).technology(technology);
+            return aTvBox().createdDate(createdDate).lastModifiedDate(lastModifiedDate).productType(productType).producingCountry(producingCountry).brandName(brandName).isOnlineOrdering(isOnlineOrdering).isSoldByInstallments(isSoldByInstallments).available(available).modelName(modelName).serialNumber(serialNumber).colorName(colorName).price(price).size(size).category(category).technology(technology);
         }
 
         public TvBox build() {

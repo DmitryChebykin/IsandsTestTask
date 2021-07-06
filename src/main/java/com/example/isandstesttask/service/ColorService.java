@@ -1,7 +1,7 @@
 package com.example.isandstesttask.service;
 
 import com.example.isandstesttask.entity.reference.Color;
-import com.example.isandstesttask.repository.ColorRepository;
+import com.example.isandstesttask.repository.reference.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

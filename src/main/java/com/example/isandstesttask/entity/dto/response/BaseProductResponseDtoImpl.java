@@ -1,4 +1,4 @@
-package com.example.isandstesttask.entity.dto;
+package com.example.isandstesttask.entity.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Setter
 @Getter
-public class BaseProductDTO {
+public class BaseProductResponseDtoImpl implements BaseProductResponseDto {
     @Id
     private UUID id;
     private String productType;
@@ -23,10 +23,10 @@ public class BaseProductDTO {
     private BigDecimal price;
     private String size;
 
-    public BaseProductDTO() {
+    public BaseProductResponseDtoImpl() {
     }
 
-    public BaseProductDTO(UUID id, String productType, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
+    public BaseProductResponseDtoImpl(UUID id, String productType, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
         this.id = id;
         this.productType = productType;
         this.producingCountry = producingCountry;

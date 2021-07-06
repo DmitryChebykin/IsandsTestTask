@@ -11,13 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @MappedSuperclass
 @Setter
 @Getter
 @NoArgsConstructor
-public class BaseProduct extends BaseEntity {
+public class BaseProduct extends BaseEntity implements BaseField {
     private String productType;
     private String producingCountry;
 
