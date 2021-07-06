@@ -1,6 +1,6 @@
 package com.example.isandstesttask.entity.mapper;
 
-import com.example.isandstesttask.entity.dto.TvBoxDto;
+import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDto;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import static com.example.isandstesttask.entity.product.TvBox.PRODUCT_TYPE;
 
 @Component
-public class TvBoxMapper implements GenericMapper<TvBox, TvBoxDto> {
+public class TvBoxMapper implements GenericMapper<TvBox, TvBoxCreatingDto> {
     private ModelMapper modelMapper;
     private TvBoxService tvBoxService;
 
@@ -24,32 +24,30 @@ public class TvBoxMapper implements GenericMapper<TvBox, TvBoxDto> {
         this.tvBoxService = tvBoxService;
     }
 
-    public TvBox asEntity(TvBoxDto tvBoxDto) {
-        TvBox tvBox = modelMapper.map(tvBoxDto, TvBox.class);
+    public TvBox asEntity(TvBoxCreatingDto tvBoxCreatingDto) {
+        TvBox tvBox = modelMapper.map(tvBoxCreatingDto, TvBox.class);
 
-        if (tvBoxDto.getId() == null) {
-            if (tvBoxService.isTvBoxExistsByModelNameAndSAndSerialNumber(tvBoxDto.getModelName(), tvBoxDto.getSerialNumber())) {
-                tvBox.setId(tvBoxService.getTvBoxBySerialNumber(tvBoxDto.getSerialNumber()).getId());
-            }
+        if (tvBoxService.isTvBoxExistsByModelNameAndSAndSerialNumber(tvBoxCreatingDto.getModelName(), tvBoxCreatingDto.getSerialNumber())) {
+            tvBox.setId(tvBoxService.getTvBoxBySerialNumber(tvBoxCreatingDto.getSerialNumber()).getId());
         }
 
         tvBox.setProductType(PRODUCT_TYPE);
 
         Brand brand = new Brand();
-        brand.setBrandName(tvBoxDto.getBrandName());
+        brand.setBrandName(tvBoxCreatingDto.getBrandName());
         tvBox.setBrandName(brand);
 
         Color color = new Color();
-        color.setColorName(tvBoxDto.getColorName());
+        color.setColorName(tvBoxCreatingDto.getColorName());
         tvBox.setColorName(color);
 
         return tvBox;
     }
 
-    public TvBoxDto asDTO(TvBox tvBox) {
-        TvBoxDto tvBoxDto = modelMapper.map(tvBox, TvBoxDto.class);
-        tvBoxDto.setBrandName(tvBox.getBrandName().getBrandName());
-        tvBoxDto.setColorName(tvBox.getColorName().getColorName());
-        return modelMapper.map(tvBox, TvBoxDto.class);
+    public TvBoxCreatingDto asDTO(TvBox tvBox) {
+        TvBoxCreatingDto tvBoxCreatingDto = modelMapper.map(tvBox, TvBoxCreatingDto.class);
+        tvBoxCreatingDto.setBrandName(tvBox.getBrandName().getBrandName());
+        tvBoxCreatingDto.setColorName(tvBox.getColorName().getColorName());
+        return modelMapper.map(tvBox, TvBoxCreatingDto.class);
     }
 }

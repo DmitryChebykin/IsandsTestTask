@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -13,6 +16,10 @@ import java.util.UUID;
 
 @Table(name = "brands")
 @Entity
+
+@DynamicUpdate
+@DynamicInsert
+@SelectBeforeUpdate
 
 @Setter
 @Getter

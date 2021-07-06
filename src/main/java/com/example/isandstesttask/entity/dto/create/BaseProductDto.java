@@ -1,4 +1,4 @@
-package com.example.isandstesttask.entity.dto;
+package com.example.isandstesttask.entity.dto.create;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,9 +8,7 @@ import java.util.UUID;
 
 @Setter
 @Getter
-public class BaseProductDTO {
-    @Id
-    private UUID id;
+public class BaseProductDto {
     private String productType;
     private String producingCountry;
     private String brandName;
@@ -23,11 +21,10 @@ public class BaseProductDTO {
     private BigDecimal price;
     private String size;
 
-    public BaseProductDTO() {
+    public BaseProductDto() {
     }
 
-    public BaseProductDTO(UUID id, String productType, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
-        this.id = id;
+    public BaseProductDto(String productType, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
         this.productType = productType;
         this.producingCountry = producingCountry;
         this.brandName = brandName;

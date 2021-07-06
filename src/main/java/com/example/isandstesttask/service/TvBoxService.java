@@ -1,8 +1,6 @@
 package com.example.isandstesttask.service;
 
 import com.example.isandstesttask.entity.product.TvBox;
-import com.example.isandstesttask.entity.reference.Brand;
-import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.repository.BrandRepository;
 import com.example.isandstesttask.repository.ColorRepository;
 import com.example.isandstesttask.repository.TvBoxRepository;
@@ -26,6 +24,7 @@ public class TvBoxService {
         this.brandRepository = brandRepository;
         this.colorRepository = colorRepository;
     }
+
     @Transactional
     public String save(TvBox tvBox) {
         return tvBoxRepository.save(tvBox).getId().toString();
@@ -39,15 +38,9 @@ public class TvBoxService {
             return optionalTvBoxes.get().getId().toString();
         }
 
-        Optional<Brand> optionalBrand = brandRepository.findByBrandName(tvBox.getBrandName().getBrandName());
+        brandRepository.findByBrandName(tvBox.getBrandName().getBrandName()).ifPresent(tvBox::setBrandName);
 
-        optionalBrand.ifPresent(tvBox::setBrandName);
-
-        Optional<Color> optionalColor = colorRepository.findByColorName(tvBox.getColorName().getColorName());
-
-        optionalColor.ifPresent(tvBox::setColorName);
-
-        tvBox.setProductType(TvBox.PRODUCT_TYPE);
+        colorRepository.findByColorName(tvBox.getColorName().getColorName()).ifPresent(tvBox::setColorName);
 
         return tvBoxRepository.save(tvBox).getId().toString();
     }

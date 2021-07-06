@@ -1,16 +1,34 @@
 package com.example.isandstesttask.entity.dto.response;
 
+import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
+import com.example.isandstesttask.entity.dto.IdDto;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+import lombok.ToString;
 import java.math.BigDecimal;
-import java.util.UUID;
-
+@ToString(callSuper = true)
 @Setter
 @Getter
-public class BaseProductResponseDtoImpl implements BaseProductResponseDto {
-    @Id
-    private UUID id;
+public class BaseProductResponseDtoImpl {
+    public BaseProductResponseDtoImpl() {
+    }
+
+    public BaseProductResponseDtoImpl(String id, String productType, String producingCountry, String brandName, Boolean isOnlineOrdering, Boolean isSoldByInstallments, Boolean available, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
+        this.id = id;
+        this.productType = productType;
+        this.producingCountry = producingCountry;
+        this.brandName = brandName;
+        this.isOnlineOrdering = isOnlineOrdering;
+        this.isSoldByInstallments = isSoldByInstallments;
+        this.available = available;
+        this.modelName = modelName;
+        this.serialNumber = serialNumber;
+        this.colorName = colorName;
+        this.price = price;
+        this.size = size;
+    }
+
+    private String id;
     private String productType;
     private String producingCountry;
     private String brandName;
@@ -22,22 +40,4 @@ public class BaseProductResponseDtoImpl implements BaseProductResponseDto {
     private String colorName;
     private BigDecimal price;
     private String size;
-
-    public BaseProductResponseDtoImpl() {
-    }
-
-    public BaseProductResponseDtoImpl(UUID id, String productType, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
-        this.id = id;
-        this.productType = productType;
-        this.producingCountry = producingCountry;
-        this.brandName = brandName;
-        this.isOnlineOrdering = isOnlineOrdering;
-        this.isSoldByInstallments = isSoldByInstallments;
-        this.available = isAvailable;
-        this.modelName = modelName;
-        this.serialNumber = serialNumber;
-        this.colorName = colorName;
-        this.price = price;
-        this.size = size;
-    }
 }

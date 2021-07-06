@@ -5,10 +5,7 @@ import com.example.isandstesttask.entity.reference.Color;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -29,6 +26,8 @@ public class BaseProduct extends BaseEntity {
     private Boolean isSoldByInstallments;
     private Boolean available;
     private String modelName;
+
+    @Column(name = "serial_number")
     private String serialNumber;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)

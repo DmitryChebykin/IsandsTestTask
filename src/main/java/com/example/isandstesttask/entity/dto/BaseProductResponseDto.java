@@ -1,18 +1,6 @@
-package com.example.isandstesttask.entity.dto.response;
+package com.example.isandstesttask.entity.dto;
 
 public interface BaseProductResponseDto {
-    void setModelName(String modelName);
-
-    void setSerialNumber(String serialNumber);
-
-    void setColorName(String colorName);
-
-    void setPrice(java.math.BigDecimal price);
-
-    void setSize(String size);
-
-    java.util.UUID getId();
-
     String getProductType();
 
     String getProducingCountry();
@@ -27,11 +15,21 @@ public interface BaseProductResponseDto {
 
     String getModelName();
 
+    void setModelName(String modelName);
+
     String getSerialNumber();
+
+    void setSerialNumber(String serialNumber);
 
     String getColorName();
 
+    void setColorName(String colorName);
+
     java.math.BigDecimal getPrice();
 
+    void setPrice(java.math.BigDecimal price);
+
     String getSize();
+
+    void setSize(String size);
 }

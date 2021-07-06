@@ -6,6 +6,9 @@ import com.example.isandstesttask.entity.reference.Color;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.SelectBeforeUpdate;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -14,7 +17,12 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(name = "serialNumber", columnNames = {"serialNumber"})})
+@Table(uniqueConstraints = {@UniqueConstraint(name = "serial_number", columnNames = {"serial_number"})})
+
+@DynamicUpdate
+@DynamicInsert
+@SelectBeforeUpdate
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -128,10 +136,6 @@ public class TvBox extends BaseProduct {
             return this;
         }
 
-        public TvBoxBuilder PRODUCT_TYPE(String PRODUCT_TYPE) {
-            this.PRODUCT_TYPE = PRODUCT_TYPE;
-            return this;
-        }
 
         public TvBoxBuilder category(String category) {
             this.category = category;
@@ -144,7 +148,7 @@ public class TvBox extends BaseProduct {
         }
 
         public TvBoxBuilder but() {
-            return aTvBox().createdDate(createdDate).lastModifiedDate(lastModifiedDate).productType(productType).producingCountry(producingCountry).brandName(brandName).isOnlineOrdering(isOnlineOrdering).isSoldByInstallments(isSoldByInstallments).available(available).modelName(modelName).serialNumber(serialNumber).colorName(colorName).price(price).size(size).PRODUCT_TYPE(PRODUCT_TYPE).category(category).technology(technology);
+            return aTvBox().createdDate(createdDate).lastModifiedDate(lastModifiedDate).productType(productType).producingCountry(producingCountry).brandName(brandName).isOnlineOrdering(isOnlineOrdering).isSoldByInstallments(isSoldByInstallments).available(available).modelName(modelName).serialNumber(serialNumber).colorName(colorName).price(price).size(size).category(category).technology(technology);
         }
 
         public TvBox build() {
