@@ -11,8 +11,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
 @Table(name = "brands")
+@Entity
+
 @Setter
 @Getter
 @NoArgsConstructor

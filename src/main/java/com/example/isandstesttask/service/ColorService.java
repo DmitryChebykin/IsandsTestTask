@@ -15,6 +15,6 @@ public class ColorService {
     }
 
     public Color getColorByName(String colorName) {
-        return colorRepository.findColorByColorName(colorName).orElse(null);
+        return colorRepository.findByColorName(colorName).orElse(null);
     }
 }

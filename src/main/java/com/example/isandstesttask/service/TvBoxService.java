@@ -43,7 +43,7 @@ public class TvBoxService {
 
         optionalBrand.ifPresent(tvBox::setBrandName);
 
-        Optional<Color> optionalColor = colorRepository.findColorByColorName(tvBox.getColorName().getColorName());
+        Optional<Color> optionalColor = colorRepository.findByColorName(tvBox.getColorName().getColorName());
 
         optionalColor.ifPresent(tvBox::setColorName);
 

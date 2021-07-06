@@ -11,8 +11,9 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
-@Entity
 @Table(name = "colors")
+@Entity
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -30,6 +31,11 @@ public class Color extends BaseEntity {
     }
 
     @Override
+    public int hashCode() {
+        return getColorName().hashCode();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -41,11 +47,6 @@ public class Color extends BaseEntity {
         Color color = (Color) o;
 
         return getColorName().equals(color.getColorName());
-    }
-
-    @Override
-    public int hashCode() {
-        return getColorName().hashCode();
     }
 
     public String getColorName() {

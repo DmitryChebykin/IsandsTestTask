@@ -1,5 +1,10 @@
 package com.example.isandstesttask.entity.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class TvBoxFilterDto extends BaseProductFilterDto {
     private String category;
     private String technology;
@@ -17,12 +22,12 @@ public class TvBoxFilterDto extends BaseProductFilterDto {
         return this.category;
     }
 
-    public String getTechnology() {
-        return this.technology;
-    }
-
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getTechnology() {
+        return this.technology;
     }
 
     public void setTechnology(String technology) {
