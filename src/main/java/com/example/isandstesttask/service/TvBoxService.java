@@ -2,6 +2,7 @@ package com.example.isandstesttask.service;
 
 import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.repository.product.TvBoxRepository;
@@ -9,13 +10,14 @@ import com.example.isandstesttask.repository.reference.BrandRepository;
 import com.example.isandstesttask.repository.reference.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class TvBoxService {
-
+@Resource
     private TvBoxRepository tvBoxRepository;
     private BrandRepository brandRepository;
     private ColorRepository colorRepository;
@@ -28,28 +30,28 @@ public class TvBoxService {
     }
 
     @Transactional
-    public String save(TvBox tvBox) {
-        return tvBoxRepository.save(tvBox).getId().toString();
+    public String save(TvBoxImpl tvBoxImpl) {
+        return tvBoxRepository.save(tvBoxImpl).getId().toString();
     }
 
     @Transactional
-    public String createTvBox(TvBox tvBox) {
-        Optional<TvBox> optionalTvBoxes = tvBoxRepository.findBySerialNumber(tvBox.getSerialNumber());
+    public String createTvBox(TvBoxImpl tvBoxImpl) {
+        Optional<TvBoxImpl> optionalTvBoxes = tvBoxRepository.findBySerialNumber(tvBoxImpl.getSerialNumber());
 
         if (optionalTvBoxes.isPresent()) {
             return optionalTvBoxes.get().getId().toString();
         }
 
-        String brandName = tvBox.getBrandName().getBrandName();
+        String brandName = tvBoxImpl.getBrandName().getBrandName();
         Optional<Brand> optionalBrand = brandRepository.findByBrandName(brandName);
 
-        optionalBrand.ifPresent(tvBox::setBrandName);
+        optionalBrand.ifPresent(tvBoxImpl::setBrandName);
 
-        Optional<Color> optionalColor = colorRepository.findByColorName(tvBox.getColorName().getColorName());
+        Optional<Color> optionalColor = colorRepository.findByColorName(tvBoxImpl.getColorName().getColorName());
 
-        optionalColor.ifPresent(tvBox::setColorName);
+        optionalColor.ifPresent(tvBoxImpl::setColorName);
 
-        return tvBoxRepository.save(tvBox).getId().toString();
+        return tvBoxRepository.save(tvBoxImpl).getId().toString();
     }
 
     public TvBox getProductById(String id) {
@@ -57,12 +59,12 @@ public class TvBoxService {
     }
 
     public String createTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
-        TvBox tvBox = getTvBox(tvBoxCreatingDtoImpl);
-        return createTvBox(tvBox);
+        TvBoxImpl tvBoxImpl = getTvBox(tvBoxCreatingDtoImpl);
+        return createTvBox(tvBoxImpl);
     }
 
-    private TvBox getTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
-        TvBox.TvBoxBuilder tvBoxBuilder = TvBox.TvBoxBuilder.aTvBox()
+    private TvBoxImpl getTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
+        TvBoxImpl.TvBoxBuilder tvBoxBuilder = TvBoxImpl.TvBoxBuilder.aTvBox()
                 .producingCountry(tvBoxCreatingDtoImpl.getProducingCountry())
                 .category(tvBoxCreatingDtoImpl.getCategory())
                 .modelName(tvBoxCreatingDtoImpl.getModelName())
@@ -82,7 +84,7 @@ public class TvBoxService {
         color.setColorName(tvBoxCreatingDtoImpl.getColorName());
         tvBoxBuilder.colorName(color);
 
-        TvBox tvBox = tvBoxBuilder.build();
+        TvBoxImpl tvBox = tvBoxBuilder.build();
         return tvBox;
     }
 }

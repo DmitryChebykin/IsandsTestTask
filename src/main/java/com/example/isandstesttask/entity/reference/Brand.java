@@ -1,7 +1,7 @@
 package com.example.isandstesttask.entity.reference;
 
-import com.example.isandstesttask.entity.BaseEntity;
-import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.BaseEntityImpl;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +24,13 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Brand extends BaseEntity {
+public class Brand extends BaseEntityImpl {
     @Column(unique = true)
     private String brandName;
 
     @JsonIgnore
     @OneToMany(mappedBy = "brandName", orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<TvBox> tvBoxes;
+    private List<TvBoxImpl> tvBoxes;
 
     public Brand(Timestamp createdDate, Timestamp lastModifiedDate, String brandName) {
         super(createdDate, lastModifiedDate);
@@ -61,7 +61,7 @@ public class Brand extends BaseEntity {
         private Timestamp createdDate;
         private Timestamp lastModifiedDate;
         private String brandName;
-        private List<TvBox> tvBoxes;
+        private List<TvBoxImpl> tvBoxes;
 
         private BrandBuilder() {
         }
@@ -90,7 +90,7 @@ public class Brand extends BaseEntity {
             return this;
         }
 
-        public BrandBuilder tvBoxes(List<TvBox> tvBoxes) {
+        public BrandBuilder tvBoxes(List<TvBoxImpl> tvBoxes) {
             this.tvBoxes = tvBoxes;
             return this;
         }

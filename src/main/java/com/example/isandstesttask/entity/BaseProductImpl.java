@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @Setter
 @Getter
 @NoArgsConstructor
-public class BaseProductImpl extends BaseEntity implements BaseProduct {
+public class BaseProductImpl extends BaseEntityImpl implements BaseProduct {
     private String productType;
     private String producingCountry;
 
