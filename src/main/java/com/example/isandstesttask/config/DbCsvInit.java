@@ -5,7 +5,6 @@ import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.service.TvBoxService;
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -13,10 +12,8 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 public class DbCsvInit {
@@ -32,7 +29,7 @@ public class DbCsvInit {
     @EventListener
     public void run(ApplicationReadyEvent event) {
         if (applicationArguments.containsOption("init")) {
-               InitDB();
+            InitDB();
         }
     }
 
@@ -40,16 +37,17 @@ public class DbCsvInit {
         String[] CSV_COLUMNS;
 
         ClassLoader loader = DbCsvInit.class.getClassLoader();
-        File file = new File(Objects.requireNonNull(loader.getResource("static/tvBox.csv")).getFile());
-
+        File file = null;
         CSVReader csvReader;
-        List<String[]> csvLines = null;
+        List<String[]> csvLines;
 
         try {
+            file = new File((loader.getResource("static/tvBox.csv")).getFile());
             csvReader = new CSVReader(new FileReader(file));
             csvLines = csvReader.readAll();
-        } catch (IOException | CsvException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Csv file read problem, check it correct?");
+            return;
         }
 
         if (csvLines != null) {
@@ -85,7 +83,12 @@ public class DbCsvInit {
                         .build();
 
                 tvBoxService.createTvBox(tvBox);
+
+                if (i % 100 == 0) {
+                    System.out.println("Добавлено строк " + i + " из " + csvLines.size());
+                }
             }
         }
+        System.out.println("Загрузка завершена.");
     }
 }

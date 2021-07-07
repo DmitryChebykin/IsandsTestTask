@@ -37,8 +37,8 @@ public class TvBoxController {
         this.tvBoxSearchCriteria = tvBoxSearchCriteria;
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<TvBox> createTV(@RequestBody TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
+    @PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<TvBox> addTvBox(@RequestBody TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
         String id = tvBoxService.createTvBox(tvBoxCreatingDtoImpl);
         TvBox tvBox = tvBoxService.getProductById(id);
         return new ResponseEntity<>(tvBox, HttpStatus.CREATED);
