@@ -10,22 +10,19 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
-import javax.persistence.Entity;
-import javax.persistence.Index;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(name = "serialNumber", columnNames = {"serial_number"})},
         indexes = {@Index(columnList = "available"),
-        @Index(columnList = "is_sold_by_installments"),
-        @Index(columnList = "is_online_ordering"),
-        @Index(columnList = "category"),
-        @Index(columnList = "technology"),
-        @Index(columnList = "colors_id"),
-        @Index(columnList = "brands_id"),
+                @Index(columnList = "is_sold_by_installments"),
+                @Index(columnList = "is_online_ordering"),
+                @Index(columnList = "category"),
+                @Index(columnList = "technology"),
+                @Index(columnList = "colors_id"),
+                @Index(columnList = "brands_id"),
         })
 
 @DynamicUpdate
@@ -36,7 +33,8 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor
 public class TvBox extends BaseProductImpl implements BaseProduct {
-    public static final String PRODUCT_TYPE = "television";
+    @Column(name = "product_type")
+    private final String productType = "television";
     private String category;
     private String technology;
 
