@@ -1,7 +1,7 @@
 package com.example.isandstesttask.entity.reference;
 
-import com.example.isandstesttask.entity.BaseEntity;
-import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.BaseEntityImpl;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +24,13 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-public class Color extends BaseEntity {
+public class Color extends BaseEntityImpl {
     @Column(unique = true)
     private String colorName;
 
     @JsonIgnore
     @OneToMany(mappedBy = "colorName", orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<TvBox> tvBoxes;
+    private List<TvBoxImpl> tvBoxes;
 
     public Color(Timestamp createdDate, Timestamp lastModifiedDate, String colorName) {
         super(createdDate, lastModifiedDate);
@@ -69,7 +69,7 @@ public class Color extends BaseEntity {
         private Timestamp createdDate;
         private Timestamp lastModifiedDate;
         private String colorName;
-        private List<TvBox> tvBoxes;
+        private List<TvBoxImpl> tvBoxes;
 
         private ColorBuilder() {
         }
@@ -98,7 +98,7 @@ public class Color extends BaseEntity {
             return this;
         }
 
-        public ColorBuilder withTvBoxes(List<TvBox> tvBoxes) {
+        public ColorBuilder withTvBoxes(List<TvBoxImpl> tvBoxes) {
             this.tvBoxes = tvBoxes;
             return this;
         }

@@ -1,12 +1,13 @@
 package com.example.isandstesttask.filter.TvBox.metamodel;
 
 import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
-@StaticMetamodel(TvBox.class)
+@StaticMetamodel(TvBoxImpl.class)
 public abstract class TvBox_ extends BaseProduct_ {
 
 	public static volatile SingularAttribute<TvBox, String> technology;

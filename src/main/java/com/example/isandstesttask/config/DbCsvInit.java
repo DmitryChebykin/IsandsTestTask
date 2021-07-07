@@ -1,6 +1,6 @@
 package com.example.isandstesttask.config;
 
-import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.service.TvBoxService;
@@ -22,9 +22,7 @@ public class DbCsvInit {
     @Resource
     private ApplicationArguments applicationArguments;
 
-    public DbCsvInit(TvBoxService tvBoxService) {
-        this.tvBoxService = tvBoxService;
-    }
+
 
     @EventListener
     public void run(ApplicationReadyEvent event) {
@@ -67,7 +65,7 @@ public class DbCsvInit {
 
                 Brand brand = Brand.BrandBuilder.aBrand().brandName(CSV_COLUMNS[3]).build();
                 Color color = Color.ColorBuilder.aColor().withColorName(CSV_COLUMNS[7]).build();
-                TvBox tvBox = TvBox.TvBoxBuilder.aTvBox()
+                TvBoxImpl tvBox = TvBoxImpl.TvBoxBuilder.aTvBox()
                         .category(CATEGORY)
                         .technology(TECHNOLOGY)
                         .available(AVAILABLE)

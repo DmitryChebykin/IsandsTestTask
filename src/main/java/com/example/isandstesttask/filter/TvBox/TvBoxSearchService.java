@@ -1,37 +1,56 @@
 package com.example.isandstesttask.filter.TvBox;
 
-import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
-import com.example.isandstesttask.util.mapper.DtoMapper;
-import com.example.isandstesttask.entity.product.TvBox;
-import com.example.isandstesttask.repository.product.TvBoxRepository;
+import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
+import com.example.isandstesttask.entity.reference.Product;
+import com.example.isandstesttask.repository.product.ProductRepository;
+import com.example.isandstesttask.util.mapper.TvBoxDtoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class TvBoxSearchService {
-    @Resource
-    private TvBoxRepository tvBoxRepository;
-    @Resource
-    private DtoMapper dtoMapper;
+    private ProductRepository productRepository;
 
-    public List<TvBox> getSortedListTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
-        Specification<TvBox> tvBoxSpecification = TvBoxSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        Sort.TypedSort<TvBox> tvBoxTypedSort = Sort.sort(TvBox.class);
-        Sort sort = tvBoxTypedSort
-                .by(TvBox::getModelName).ascending()
-                .and(tvBoxTypedSort.by(TvBox::getPrice).descending());
-        return Optional.ofNullable(tvBoxRepository.findAll(tvBoxSpecification, sort)).orElse(new ArrayList<>(0));
+    private TvBoxDtoMapper tvBoxDtoMapper;
+
+    @Autowired
+    public TvBoxSearchService(ProductRepository productRepository, TvBoxDtoMapper tvBoxDtoMapper) {
+        this.productRepository = productRepository;
+        this.tvBoxDtoMapper = tvBoxDtoMapper;
     }
 
-    public List<BaseProductResponseDto> getSortedListOfResponseDto(TvBoxSearchCriteria tvBoxSearchCriteria) {
-        List<TvBox> all = getSortedListTvBox(tvBoxSearchCriteria);
+    public List getSortedByNameAscAndPriceDescListTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
+        Specification<Product> baseSpecification = BaseSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
+        Specification<Product> tvBoxSpecification = TvBoxSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
+        baseSpecification.and(tvBoxSpecification);
+        Sort.TypedSort<Product> tvBoxTypedSort = Sort.sort(Product.class);
+        Sort sort = tvBoxTypedSort
+                .by(Product::getModelName).ascending()
+                .and(tvBoxTypedSort.by(Product::getPrice).descending());
+        return productRepository.findAll(baseSpecification, sort);
+    }
 
-        return all.stream().map(tv -> dtoMapper.asDTO(tv)).collect(Collectors.toList());
+    public List<TvBoxResponseDtoImpl> getSortedListByNameAscAndPriceDescOfResponseDto(TvBoxSearchCriteria tvBoxSearchCriteria) {
+        List<Product> all = getSortedByNameAscAndPriceDescListTvBox(tvBoxSearchCriteria);
+
+        List<TvBoxResponseDtoImpl> list = new ArrayList<>();
+        for (Product tv : all) {
+            new TvBoxResponseDtoImpl();
+            TvBoxResponseDtoImpl tvBoxResponseDto;
+            tvBoxResponseDto = tvBoxDtoMapper.asDTO(tv);
+            list.add(tvBoxResponseDto);
+        }
+        return list;
+    }
+
+    public List<Product> getUnsortedTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
+        Specification<Product> baseSpecification = BaseSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
+        Specification<Product> tvBoxSpecification = TvBoxSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
+        baseSpecification.and(tvBoxSpecification);
+        return productRepository.findAll(baseSpecification);
     }
 }
