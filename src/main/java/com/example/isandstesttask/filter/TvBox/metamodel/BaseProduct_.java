@@ -1,6 +1,7 @@
-package com.example.isandstesttask.entity.metamodel;
+package com.example.isandstesttask.filter.TvBox.metamodel;
 
 import com.example.isandstesttask.entity.BaseProduct;
+import com.example.isandstesttask.entity.BaseProductImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import javax.annotation.Generated;
@@ -9,7 +10,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import java.math.BigDecimal;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
-@StaticMetamodel(BaseProduct.class)
+@StaticMetamodel(BaseProductImpl.class)
 public abstract class BaseProduct_ extends BaseEntity_ {
 
 	public static volatile SingularAttribute<BaseProduct, String> modelName;

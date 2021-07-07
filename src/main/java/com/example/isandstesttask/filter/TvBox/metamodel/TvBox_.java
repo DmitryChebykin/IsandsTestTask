@@ -1,4 +1,4 @@
-package com.example.isandstesttask.entity.metamodel;
+package com.example.isandstesttask.filter.TvBox.metamodel;
 
 import com.example.isandstesttask.entity.product.TvBox;
 import javax.annotation.Generated;

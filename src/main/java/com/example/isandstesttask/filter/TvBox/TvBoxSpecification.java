@@ -1,9 +1,9 @@
 package com.example.isandstesttask.filter.TvBox;
 
-import com.example.isandstesttask.entity.metamodel.TvBox_;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
+import com.example.isandstesttask.filter.TvBox.metamodel.TvBox_;
 import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,11 +26,14 @@ public final class TvBoxSpecification {
         Specification<TvBox> countrySpec = countryIs(tvBoxSearchCriteria.getProducingCountry());
         Specification<TvBox> serialSpec = serialIs(tvBoxSearchCriteria.getSerialNumber());
         Specification<TvBox> techSpec = technologyIs(tvBoxSearchCriteria.getTechnology());
-        Specification<TvBox> minPrice = hasPriceAbove(tvBoxSearchCriteria.getMinPrice());
-        Specification<TvBox> maxPrice = hasPriceUnder(tvBoxSearchCriteria.getMaxPrice());
+        Specification<TvBox> minPriceSpec = hasPriceAbove(tvBoxSearchCriteria.getMinPrice());
+        Specification<TvBox> maxPriceSpec = hasPriceUnder(tvBoxSearchCriteria.getMaxPrice());
+        Specification<TvBox> availSpec = availableIs(tvBoxSearchCriteria.getIsAvailable());
+        Specification<TvBox> onlineOrderingSpec = onlineOrderingIs(tvBoxSearchCriteria.getIsOnlineOrdering());
+        Specification<TvBox> soldInstalmentsSpec = soldInstalmentsIs(tvBoxSearchCriteria.getIsSoldByInstallments());
 
-        return minPrice
-                .and(maxPrice)
+        return minPriceSpec
+                .and(maxPriceSpec)
                 .and(categorySpec)
                 .and(countrySpec)
                 .and(modelNameSpec)
@@ -38,7 +41,22 @@ public final class TvBoxSpecification {
                 .and(serialSpec)
                 .and(sizeSpec)
                 .and(techSpec)
-                .and(brandSpec);
+                .and(brandSpec)
+                .and(availSpec)
+                .and(onlineOrderingSpec)
+                .and(soldInstalmentsSpec);
+    }
+
+    private static Specification<TvBox> availableIs(Optional<Boolean> isAvailable) {
+        return (root, query, builder) -> isAvailable.map(e -> builder.equal(root.get(TvBox_.AVAILABLE), e)).orElse(null);
+    }
+
+    private static Specification<TvBox> onlineOrderingIs(Optional<Boolean> isOnlineOrdering) {
+        return (root, query, builder) -> isOnlineOrdering.map(e -> builder.equal(root.get(TvBox_.IS_ONLINE_ORDERING), e)).orElse(null);
+    }
+
+    private static Specification<TvBox> soldInstalmentsIs(Optional<Boolean> isSoldByInstallments) {
+        return (root, query, builder) -> isSoldByInstallments.map(e -> builder.equal(root.get(TvBox_.IS_SOLD_BY_INSTALLMENTS), e)).orElse(null);
     }
 
     private static Specification<TvBox> sizeIs(Optional<String> size) {

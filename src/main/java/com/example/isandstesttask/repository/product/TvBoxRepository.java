@@ -1,4 +1,4 @@
-package com.example.isandstesttask.repository;
+package com.example.isandstesttask.repository.product;
 
 import com.example.isandstesttask.entity.product.TvBox;
 import org.springframework.data.domain.Sort;
@@ -17,7 +17,6 @@ public interface TvBoxRepository extends JpaRepository<TvBox, UUID>, JpaSpecific
 
     Optional<TvBox> findBySerialNumberAndModelName(String serialNumber, String modelName);
 
-    List<TvBox> findAll(@Nullable Specification<TvBox> spec);
 
     List<TvBox> findAll(@Nullable Specification<TvBox> spec, Sort sort);
 

@@ -1,13 +1,15 @@
 package com.example.isandstesttask.service;
 
+import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.product.TvBox;
-import com.example.isandstesttask.repository.BrandRepository;
-import com.example.isandstesttask.repository.ColorRepository;
-import com.example.isandstesttask.repository.TvBoxRepository;
+import com.example.isandstesttask.entity.reference.Brand;
+import com.example.isandstesttask.entity.reference.Color;
+import com.example.isandstesttask.repository.reference.BrandRepository;
+import com.example.isandstesttask.repository.reference.ColorRepository;
+import com.example.isandstesttask.repository.product.TvBoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,15 +51,30 @@ public class TvBoxService {
         return tvBoxRepository.getById(UUID.fromString(id));
     }
 
-    public List<TvBox> getAll() {
-        return tvBoxRepository.findAll();
+    public String createTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
+        TvBox tvBox = getTvBox(tvBoxCreatingDtoImpl);
+        return createTvBox(tvBox);
     }
 
-    public boolean isTvBoxExistsByModelNameAndSAndSerialNumber(String modelName, String serialNumber) {
-        return tvBoxRepository.findBySerialNumberAndModelName(serialNumber, modelName).isPresent();
-    }
+    private TvBox getTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
+        TvBox.TvBoxBuilder tvBoxBuilder = TvBox.TvBoxBuilder.aTvBox()
+                .category(tvBoxCreatingDtoImpl.getCategory())
+                .modelName(tvBoxCreatingDtoImpl.getModelName())
+                .price(tvBoxCreatingDtoImpl.getPrice())
+                .serialNumber(tvBoxCreatingDtoImpl.getSerialNumber())
+                .size(tvBoxCreatingDtoImpl.getSize())
+                .technology(tvBoxCreatingDtoImpl.getTechnology())
+                .isOnlineOrdering(tvBoxCreatingDtoImpl.getIsOnlineOrdering())
+                .isSoldByInstallments(tvBoxCreatingDtoImpl.getIsSoldByInstallments())
+                .available(tvBoxCreatingDtoImpl.getAvailable());
 
-    public TvBox getTvBoxBySerialNumber(String serialNumber) {
-        return tvBoxRepository.findBySerialNumber(serialNumber).orElseThrow(() -> new ProductRequestException("Not found product with serial : " + serialNumber));
+        Brand brand = brandRepository.findByBrandName(tvBoxCreatingDtoImpl.getBrandName()).orElse(null);
+        tvBoxBuilder.brandName(brand);
+
+        Color color = colorRepository.findByColorName(tvBoxCreatingDtoImpl.getColorName()).orElse(null);
+        tvBoxBuilder.colorName(color);
+
+        TvBox tvBox = tvBoxBuilder.build();
+        return tvBox;
     }
 }

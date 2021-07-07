@@ -1,11 +1,13 @@
 package com.example.isandstesttask.entity.dto;
 
-public interface BaseProductResponseDto {
-    String getProductType();
+import java.math.BigDecimal;
 
+public interface BaseProductResponseDto {
     String getProducingCountry();
 
     String getBrandName();
+
+    void setBrandName(String brandName);
 
     Boolean getIsOnlineOrdering();
 
@@ -25,9 +27,9 @@ public interface BaseProductResponseDto {
 
     void setColorName(String colorName);
 
-    java.math.BigDecimal getPrice();
+    BigDecimal getPrice();
 
-    void setPrice(java.math.BigDecimal price);
+    void setPrice(BigDecimal price);
 
     String getSize();
 

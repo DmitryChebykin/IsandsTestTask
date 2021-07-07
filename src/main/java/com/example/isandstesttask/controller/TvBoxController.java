@@ -1,8 +1,7 @@
 package com.example.isandstesttask.controller;
 
-import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDto;
-import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
-import com.example.isandstesttask.entity.mapper.GenericMapper;
+import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
+import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
@@ -24,88 +23,90 @@ import java.util.Optional;
 @RequestMapping("/product/tv")
 public class TvBoxController {
     private TvBoxService tvBoxService;
-    private GenericMapper<TvBox, TvBoxCreatingDto> tvBoxDtoGenericMapper;
     private BrandService brandService;
     private TvBoxSearchService tvBoxSearchService;
     private ColorService colorService;
     private TvBoxSearchCriteria tvBoxSearchCriteria;
 
     @Autowired
-    public TvBoxController(TvBoxService tvBoxService, GenericMapper<TvBox, TvBoxCreatingDto> tvBoxDtoGenericMapper, BrandService brandService, TvBoxSearchService tvBoxSearchService, ColorService colorService, TvBoxSearchCriteria tvBoxSearchCriteria) {
+    public TvBoxController(TvBoxService tvBoxService, BrandService brandService, TvBoxSearchService tvBoxSearchService, ColorService colorService, TvBoxSearchCriteria tvBoxSearchCriteria) {
         this.tvBoxService = tvBoxService;
-        this.tvBoxDtoGenericMapper = tvBoxDtoGenericMapper;
         this.brandService = brandService;
         this.tvBoxSearchService = tvBoxSearchService;
         this.colorService = colorService;
         this.tvBoxSearchCriteria = tvBoxSearchCriteria;
     }
 
-
-
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<TvBox> createTV(@RequestBody TvBoxCreatingDto tvBoxCreatingDto) {
-        String id = tvBoxService.createTvBox(tvBoxDtoGenericMapper.asEntity(tvBoxCreatingDto));
+    ResponseEntity<TvBox> createTV(@RequestBody TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
+        String id = tvBoxService.createTvBox(tvBoxCreatingDtoImpl);
         TvBox tvBox = tvBoxService.getProductById(id);
         return new ResponseEntity<>(tvBox, HttpStatus.CREATED);
     }
 
-
-    ResponseEntity<List<TvBox>> getFilteredTvBox(
-            @RequestParam(required = false) Optional<BigDecimal> minPrice,
-            @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-            @RequestParam(required = false) Optional<String> color,
-            @RequestParam(required = false) Optional<String> brand,
-            @RequestParam(required = false) Optional<String> category,
-            @RequestParam(required = false) Optional<String> country,
-            @RequestParam(required = false) Optional<String> serial,
-            @RequestParam(required = false) Optional<String> model,
-            @RequestParam(required = false) Optional<String> size,
-            @RequestParam(required = false) Optional<String> technology) {
-
-        setTvBoxSearchCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology);
-
-        List<TvBox> tvBoxes = tvBoxSearchService.searchTvBox(tvBoxSearchCriteria);
-
-        return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
-    }
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/search/detail_result", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    ResponseEntity<List<TvBoxResponseDtoImpl>> getFilteredTvBoxDto(
-            @RequestParam(required = false) Optional<BigDecimal> minPrice,
-            @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-            @RequestParam(required = false) Optional<String> color,
-            @RequestParam(required = false) Optional<String> brand,
-            @RequestParam(required = false) Optional<String> category,
-            @RequestParam(required = false) Optional<String> country,
-            @RequestParam(required = false) Optional<String> serial,
-            @RequestParam(required = false) Optional<String> model,
-            @RequestParam(required = false) Optional<String> size,
-            @RequestParam(required = false) Optional<String> technology) {
+    ResponseEntity<List<TvBox>> getFilteredTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
+                                                 @RequestParam(required = false) Optional<BigDecimal> maxPrice,
+                                                 @RequestParam(required = false) Optional<String> color,
+                                                 @RequestParam(required = false) Optional<String> brand,
+                                                 @RequestParam(required = false) Optional<String> category,
+                                                 @RequestParam(required = false) Optional<String> country,
+                                                 @RequestParam(required = false) Optional<String> serial,
+                                                 @RequestParam(required = false) Optional<String> model,
+                                                 @RequestParam(required = false) Optional<String> size,
+                                                 @RequestParam(required = false) Optional<String> technology,
+                                                 @RequestParam(required = false) Optional<Boolean> available,
+                                                 @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
+                                                 @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
 
-        setTvBoxSearchCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology);
-
-
-        List<TvBoxResponseDtoImpl> tvBoxes = tvBoxSearchService.getListTvBoxResponseDtoImpl(tvBoxSearchCriteria);
+        setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
+        List<TvBox> tvBoxes = tvBoxSearchService.getSortedListTvBox(tvBoxSearchCriteria);
 
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }
 
-    private void setTvBoxSearchCriteria(Optional<BigDecimal> minPrice,
-                                        Optional<BigDecimal> maxPrice,
-                                        Optional<String> color,
-                                        Optional<String> brand,
-                                        Optional<String> category,
-                                        Optional<String> country,
-                                        Optional<String> serial,
-                                        Optional<String> model,
-                                        Optional<String> size,
-                                        Optional<String> technology) {
+    @GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    ResponseEntity<List<BaseProductResponseDto>> getFilteredTvBoxDto(@RequestParam(required = false) Optional<BigDecimal> minPrice,
+                                                                     @RequestParam(required = false) Optional<BigDecimal> maxPrice,
+                                                                     @RequestParam(required = false) Optional<String> color,
+                                                                     @RequestParam(required = false) Optional<String> brand,
+                                                                     @RequestParam(required = false) Optional<String> category,
+                                                                     @RequestParam(required = false) Optional<String> country,
+                                                                     @RequestParam(required = false) Optional<String> serial,
+                                                                     @RequestParam(required = false) Optional<String> model,
+                                                                     @RequestParam(required = false) Optional<String> size,
+                                                                     @RequestParam(required = false) Optional<String> technology,
+                                                                     @RequestParam(required = false) Optional<Boolean> available,
+                                                                     @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
+                                                                     @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
+
+        setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
+
+        List<BaseProductResponseDto> tvBoxes = tvBoxSearchService.getSortedListOfResponseDto(tvBoxSearchCriteria);
+
+        return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
+    }
+
+    private void setCriteria(Optional<BigDecimal> minPrice,
+                             Optional<BigDecimal> maxPrice,
+                             Optional<String> color,
+                             Optional<String> brand,
+                             Optional<String> category,
+                             Optional<String> country,
+                             Optional<String> serial,
+                             Optional<String> model,
+                             Optional<String> size,
+                             Optional<String> technology,
+                             Optional<Boolean> available,
+                             Optional<Boolean> isOnlineOrdering,
+                             Optional<Boolean> isSoldByInstallments) {
         Optional<Brand> optionalBrand = Optional.ofNullable(brandService.getBrandByName(brand.orElse(null)));
 
         Optional<Color> optionalColor = Optional.ofNullable(colorService.getColorByName(color.orElse(null)));
 
-         tvBoxSearchCriteria = TvBoxSearchCriteria.TvBoxSearchCriteriaBuilder.aTvBoxSearchCriteria()
+        tvBoxSearchCriteria = TvBoxSearchCriteria.TvBoxSearchCriteriaBuilder.aTvBoxSearchCriteria()
                 .category(category)
                 .brandName(optionalBrand)
                 .colorName(optionalColor)
@@ -116,6 +117,9 @@ public class TvBoxController {
                 .modelName(model)
                 .size(size)
                 .technology(technology)
+                .isAvailable(available)
+                .isOnlineOrdering(isOnlineOrdering)
+                .isSoldByInstallments(isSoldByInstallments)
                 .build();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.isandstesttask.entity.product;
 
 import com.example.isandstesttask.entity.BaseProduct;
+import com.example.isandstesttask.entity.BaseProductImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import lombok.Getter;
@@ -10,14 +11,22 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(name = "serial_number", columnNames = {"serial_number"})})
+@Table(uniqueConstraints = {@UniqueConstraint(name = "serialNumber", columnNames = {"serial_number"})},
+        indexes = {@Index(columnList = "available"),
+        @Index(columnList = "is_sold_by_installments"),
+        @Index(columnList = "is_online_ordering"),
+        @Index(columnList = "category"),
+        @Index(columnList = "technology"),
+        @Index(columnList = "colors_id"),
+        @Index(columnList = "brands_id"),
+        })
 
 @DynamicUpdate
 @DynamicInsert
@@ -26,7 +35,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @NoArgsConstructor
-public class TvBox extends BaseProduct {
+public class TvBox extends BaseProductImpl implements BaseProduct {
     public static final String PRODUCT_TYPE = "television";
     private String category;
     private String technology;
@@ -69,7 +78,6 @@ public class TvBox extends BaseProduct {
         public static TvBoxBuilder aTvBox() {
             return new TvBoxBuilder();
         }
-
 
         public TvBoxBuilder createdDate(Timestamp createdDate) {
             this.createdDate = createdDate;
@@ -136,7 +144,6 @@ public class TvBox extends BaseProduct {
             return this;
         }
 
-
         public TvBoxBuilder category(String category) {
             this.category = category;
             return this;
@@ -145,10 +152,6 @@ public class TvBox extends BaseProduct {
         public TvBoxBuilder technology(String technology) {
             this.technology = technology;
             return this;
-        }
-
-        public TvBoxBuilder but() {
-            return aTvBox().createdDate(createdDate).lastModifiedDate(lastModifiedDate).productType(productType).producingCountry(producingCountry).brandName(brandName).isOnlineOrdering(isOnlineOrdering).isSoldByInstallments(isSoldByInstallments).available(available).modelName(modelName).serialNumber(serialNumber).colorName(colorName).price(price).size(size).category(category).technology(technology);
         }
 
         public TvBox build() {

@@ -21,4 +21,9 @@ public class TvBoxResponseDtoImpl extends BaseProductResponseDtoImpl implements 
 
     public TvBoxResponseDtoImpl() {
     }
+
+    @Override
+    public void setProductType() {
+
+    }
 }

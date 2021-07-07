@@ -9,7 +9,6 @@ import java.util.UUID;
 @Setter
 @Getter
 public class BaseProductDto {
-    private String productType;
     private String producingCountry;
     private String brandName;
     private Boolean isOnlineOrdering;
@@ -24,8 +23,7 @@ public class BaseProductDto {
     public BaseProductDto() {
     }
 
-    public BaseProductDto(String productType, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
-        this.productType = productType;
+    public BaseProductDto(String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size) {
         this.producingCountry = producingCountry;
         this.brandName = brandName;
         this.isOnlineOrdering = isOnlineOrdering;

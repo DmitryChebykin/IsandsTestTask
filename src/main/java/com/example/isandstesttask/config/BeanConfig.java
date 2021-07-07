@@ -1,6 +1,6 @@
 package com.example.isandstesttask.config;
 
-import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDto;
+import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.filter.TvBox.TvBoxSearchCriteria;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -15,12 +15,17 @@ public class BeanConfig {
     }
 
     @Bean
-    public TvBoxCreatingDto tvBoxDto() {
-        return new TvBoxCreatingDto();
+    public TvBoxCreatingDtoImpl tvBoxDto() {
+        return new TvBoxCreatingDtoImpl();
     }
 
     @Bean
     public TvBoxSearchCriteria tvBoxSearchCriteria() {
         return new TvBoxSearchCriteria();
     }
+
+//    @Bean
+//    public DtoMapper dtoMapper() {
+//        return new DtoMapper();
+//    }
 }
