@@ -29,7 +29,7 @@ public class Brand extends BaseEntity {
     private String brandName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "brandName", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "brandName", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<TvBox> tvBoxes;
 
     public Brand(Timestamp createdDate, Timestamp lastModifiedDate, String brandName) {

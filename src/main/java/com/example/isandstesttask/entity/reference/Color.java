@@ -29,7 +29,7 @@ public class Color extends BaseEntity {
     private String colorName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "colorName", orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "colorName", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<TvBox> tvBoxes;
 
     public Color(Timestamp createdDate, Timestamp lastModifiedDate, String colorName) {

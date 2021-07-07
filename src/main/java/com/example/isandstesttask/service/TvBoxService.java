@@ -49,8 +49,6 @@ public class TvBoxService {
 
         optionalColor.ifPresent(tvBox::setColorName);
 
-        tvBox.setProductType(TvBox.PRODUCT_TYPE);
-
         return tvBoxRepository.save(tvBox).getId().toString();
     }
 
