@@ -4,9 +4,9 @@ import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
+import com.example.isandstesttask.repository.product.TvBoxRepository;
 import com.example.isandstesttask.repository.reference.BrandRepository;
 import com.example.isandstesttask.repository.reference.ColorRepository;
-import com.example.isandstesttask.repository.product.TvBoxRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -40,9 +40,16 @@ public class TvBoxService {
             return optionalTvBoxes.get().getId().toString();
         }
 
-        brandRepository.findByBrandName(tvBox.getBrandName().getBrandName()).ifPresent(tvBox::setBrandName);
+        String brandName = tvBox.getBrandName().getBrandName();
+        Optional<Brand> optionalBrand = brandRepository.findByBrandName(brandName);
 
-        colorRepository.findByColorName(tvBox.getColorName().getColorName()).ifPresent(tvBox::setColorName);
+        optionalBrand.ifPresent(tvBox::setBrandName);
+
+        Optional<Color> optionalColor = colorRepository.findByColorName(tvBox.getColorName().getColorName());
+
+        optionalColor.ifPresent(tvBox::setColorName);
+
+        tvBox.setProductType(TvBox.PRODUCT_TYPE);
 
         return tvBoxRepository.save(tvBox).getId().toString();
     }
@@ -58,6 +65,7 @@ public class TvBoxService {
 
     private TvBox getTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
         TvBox.TvBoxBuilder tvBoxBuilder = TvBox.TvBoxBuilder.aTvBox()
+                .producingCountry(tvBoxCreatingDtoImpl.getProducingCountry())
                 .category(tvBoxCreatingDtoImpl.getCategory())
                 .modelName(tvBoxCreatingDtoImpl.getModelName())
                 .price(tvBoxCreatingDtoImpl.getPrice())
@@ -68,10 +76,12 @@ public class TvBoxService {
                 .isSoldByInstallments(tvBoxCreatingDtoImpl.getIsSoldByInstallments())
                 .available(tvBoxCreatingDtoImpl.getAvailable());
 
-        Brand brand = brandRepository.findByBrandName(tvBoxCreatingDtoImpl.getBrandName()).orElse(null);
+        Brand brand = brandRepository.findByBrandName(tvBoxCreatingDtoImpl.getBrandName()).orElseGet(Brand::new);
+        brand.setBrandName(tvBoxCreatingDtoImpl.getBrandName());
         tvBoxBuilder.brandName(brand);
 
-        Color color = colorRepository.findByColorName(tvBoxCreatingDtoImpl.getColorName()).orElse(null);
+        Color color = colorRepository.findByColorName(tvBoxCreatingDtoImpl.getColorName()).orElseGet(Color::new);
+        color.setColorName(tvBoxCreatingDtoImpl.getColorName());
         tvBoxBuilder.colorName(color);
 
         TvBox tvBox = tvBoxBuilder.build();
