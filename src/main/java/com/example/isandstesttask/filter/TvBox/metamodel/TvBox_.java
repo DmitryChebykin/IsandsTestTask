@@ -1,6 +1,5 @@
 package com.example.isandstesttask.filter.TvBox.metamodel;
-
-import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.interfaces.TvBox;
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;

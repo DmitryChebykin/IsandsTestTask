@@ -1,11 +1,11 @@
 package com.example.isandstesttask.controller;
 
+import com.example.isandstesttask.entity.TvBoxProduct;
 import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
-import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.interfaces.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
-import com.example.isandstesttask.entity.reference.Product;
 import com.example.isandstesttask.filter.TvBox.TvBoxSearchCriteria;
 import com.example.isandstesttask.filter.TvBox.TvBoxSearchService;
 import com.example.isandstesttask.service.BrandService;
@@ -40,51 +40,51 @@ public class TvBoxController {
 
     @PostMapping(path = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<TvBox> addTvBox(@RequestBody TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
-        String id = tvBoxService.createTvBox(tvBoxCreatingDtoImpl);
+        String id = tvBoxService.addTvBox(tvBoxCreatingDtoImpl);
         TvBox tvBox = tvBoxService.getProductById(id);
         return new ResponseEntity<>(tvBox, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/search/unsorted", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    ResponseEntity<List<Product>> getTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
-                                                   @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-                                                   @RequestParam(required = false) Optional<String> color,
-                                                   @RequestParam(required = false) Optional<String> brand,
-                                                   @RequestParam(required = false) Optional<String> category,
-                                                   @RequestParam(required = false) Optional<String> country,
-                                                   @RequestParam(required = false) Optional<String> serial,
-                                                   @RequestParam(required = false) Optional<String> model,
-                                                   @RequestParam(required = false) Optional<String> size,
-                                                   @RequestParam(required = false) Optional<String> technology,
-                                                   @RequestParam(required = false) Optional<Boolean> available,
-                                                   @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
-                                                   @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
+    ResponseEntity<List<TvBoxProduct>> getTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
+                                                @RequestParam(required = false) Optional<BigDecimal> maxPrice,
+                                                @RequestParam(required = false) Optional<String> color,
+                                                @RequestParam(required = false) Optional<String> brand,
+                                                @RequestParam(required = false) Optional<String> category,
+                                                @RequestParam(required = false) Optional<String> country,
+                                                @RequestParam(required = false) Optional<String> serial,
+                                                @RequestParam(required = false) Optional<String> model,
+                                                @RequestParam(required = false) Optional<String> size,
+                                                @RequestParam(required = false) Optional<String> technology,
+                                                @RequestParam(required = false) Optional<Boolean> available,
+                                                @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
+                                                @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
 
         setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
-        List<Product> tvBoxes = tvBoxSearchService.getUnsortedTvBox(tvBoxSearchCriteria);
+        List<TvBoxProduct> tvBoxes = tvBoxSearchService.getUnsortedTvBox(tvBoxSearchCriteria);
 
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }
 
     @GetMapping(path = "/search/detail_result", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    ResponseEntity<List<Product>> getFilteredTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
-                                                   @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-                                                   @RequestParam(required = false) Optional<String> color,
-                                                   @RequestParam(required = false) Optional<String> brand,
-                                                   @RequestParam(required = false) Optional<String> category,
-                                                   @RequestParam(required = false) Optional<String> country,
-                                                   @RequestParam(required = false) Optional<String> serial,
-                                                   @RequestParam(required = false) Optional<String> model,
-                                                   @RequestParam(required = false) Optional<String> size,
-                                                   @RequestParam(required = false) Optional<String> technology,
-                                                   @RequestParam(required = false) Optional<Boolean> available,
-                                                   @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
-                                                   @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
+    ResponseEntity<List<TvBoxProduct>> getFilteredTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
+                                                        @RequestParam(required = false) Optional<BigDecimal> maxPrice,
+                                                        @RequestParam(required = false) Optional<String> color,
+                                                        @RequestParam(required = false) Optional<String> brand,
+                                                        @RequestParam(required = false) Optional<String> category,
+                                                        @RequestParam(required = false) Optional<String> country,
+                                                        @RequestParam(required = false) Optional<String> serial,
+                                                        @RequestParam(required = false) Optional<String> model,
+                                                        @RequestParam(required = false) Optional<String> size,
+                                                        @RequestParam(required = false) Optional<String> technology,
+                                                        @RequestParam(required = false) Optional<Boolean> available,
+                                                        @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
+                                                        @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
 
         setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
-        List<Product> tvBoxes = tvBoxSearchService.getSortedByNameAscAndPriceDescListTvBox(tvBoxSearchCriteria);
+        List<TvBoxProduct> tvBoxes = tvBoxSearchService.getSortedByNameAscAndPriceDescListTvBox(tvBoxSearchCriteria);
 
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }

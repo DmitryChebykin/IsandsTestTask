@@ -1,7 +1,7 @@
 package com.example.isandstesttask.service;
 
 import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
-import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.interfaces.TvBox;
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
@@ -35,7 +35,7 @@ public class TvBoxService {
     }
 
     @Transactional
-    public String createTvBox(TvBoxImpl tvBoxImpl) {
+    public String addTvBox(TvBoxImpl tvBoxImpl) {
         Optional<TvBoxImpl> optionalTvBoxes = tvBoxRepository.findBySerialNumber(tvBoxImpl.getSerialNumber());
 
         if (optionalTvBoxes.isPresent()) {
@@ -58,9 +58,9 @@ public class TvBoxService {
         return tvBoxRepository.getById(UUID.fromString(id));
     }
 
-    public String createTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
+    public String addTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {
         TvBoxImpl tvBoxImpl = getTvBox(tvBoxCreatingDtoImpl);
-        return createTvBox(tvBoxImpl);
+        return addTvBox(tvBoxImpl);
     }
 
     private TvBoxImpl getTvBox(TvBoxCreatingDtoImpl tvBoxCreatingDtoImpl) {

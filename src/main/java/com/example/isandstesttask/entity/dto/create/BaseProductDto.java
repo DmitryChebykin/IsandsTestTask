@@ -2,9 +2,7 @@ package com.example.isandstesttask.entity.dto.create;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Setter
 @Getter

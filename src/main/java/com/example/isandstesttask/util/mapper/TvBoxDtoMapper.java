@@ -1,9 +1,9 @@
 package com.example.isandstesttask.util.mapper;
 
 import com.example.isandstesttask.entity.BaseProduct;
+import com.example.isandstesttask.entity.TvBoxProduct;
 import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
-import com.example.isandstesttask.entity.reference.Product;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -20,7 +20,7 @@ public class TvBoxDtoMapper {
     @Autowired
     public TvBoxDtoMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
-        this.modelMapper.addMappings(new PropertyMap<Product, BaseProductResponseDto>() {
+        this.modelMapper.addMappings(new PropertyMap<TvBoxProduct, BaseProductResponseDto>() {
             protected void configure() {
                 map().setBrandName(source.getBrandName().getBrandName());
             }
@@ -32,10 +32,10 @@ public class TvBoxDtoMapper {
         });
     }
 
-    public TvBoxResponseDtoImpl asDTO(Product product) {
+    public TvBoxResponseDtoImpl asDTO(TvBoxProduct tvBoxProduct) {
         TvBoxResponseDtoImpl tvBoxResponseDto = new TvBoxResponseDtoImpl();
 
-        modelMapper.map(product, tvBoxResponseDto);
+        modelMapper.map(tvBoxProduct, tvBoxResponseDto);
 
         return tvBoxResponseDto;
     }

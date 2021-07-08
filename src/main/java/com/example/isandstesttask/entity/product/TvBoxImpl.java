@@ -2,9 +2,10 @@ package com.example.isandstesttask.entity.product;
 
 import com.example.isandstesttask.entity.BaseProduct;
 import com.example.isandstesttask.entity.BaseProductImpl;
+import com.example.isandstesttask.entity.TvBoxProduct;
+import com.example.isandstesttask.entity.product.interfaces.TvBox;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
-import com.example.isandstesttask.entity.reference.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,7 +35,7 @@ import java.sql.Timestamp;
 @Getter
 @NoArgsConstructor
 
-public class TvBoxImpl extends BaseProductImpl implements BaseProduct, TvBox, Product {
+public class TvBoxImpl extends BaseProductImpl implements BaseProduct, TvBox, TvBoxProduct {
     @Column(name = "product_type")
     private final String productType = "television";
     private String category;
@@ -55,7 +56,6 @@ public class TvBoxImpl extends BaseProductImpl implements BaseProduct, TvBox, Pr
     }
 
     public static final class TvBoxBuilder {
-        public static String PRODUCT_TYPE = "television";
         private Timestamp createdDate;
         private Timestamp lastModifiedDate;
         private String productType;
@@ -89,10 +89,6 @@ public class TvBoxImpl extends BaseProductImpl implements BaseProduct, TvBox, Pr
             return this;
         }
 
-        public TvBoxBuilder productType(String productType) {
-            this.productType = productType;
-            return this;
-        }
 
         public TvBoxBuilder producingCountry(String producingCountry) {
             this.producingCountry = producingCountry;
@@ -158,7 +154,6 @@ public class TvBoxImpl extends BaseProductImpl implements BaseProduct, TvBox, Pr
             TvBoxImpl tvBox = new TvBoxImpl();
             tvBox.setCreatedDate(createdDate);
             tvBox.setLastModifiedDate(lastModifiedDate);
-            tvBox.setProductType(productType);
             tvBox.setProducingCountry(producingCountry);
             tvBox.setBrandName(brandName);
             tvBox.setIsOnlineOrdering(isOnlineOrdering);

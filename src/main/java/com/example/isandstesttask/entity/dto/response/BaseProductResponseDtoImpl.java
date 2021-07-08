@@ -1,7 +1,5 @@
 package com.example.isandstesttask.entity.dto.response;
 
-import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
-import com.example.isandstesttask.entity.dto.IdDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
