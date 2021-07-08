@@ -3,6 +3,9 @@ package com.example.isandstesttask.util.mapper;
 import com.example.isandstesttask.entity.BaseProduct;
 import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
+import com.example.isandstesttask.entity.dto.response.VacuumCleanerResponseDtoImpl;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
+import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
 import com.example.isandstesttask.entity.reference.Product;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,11 +35,19 @@ public class TvBoxDtoMapper {
         });
     }
 
-    public TvBoxResponseDtoImpl asDTO(Product product) {
+    public TvBoxResponseDtoImpl TvAsDTO(TvBoxImpl tvBox) {
         TvBoxResponseDtoImpl tvBoxResponseDto = new TvBoxResponseDtoImpl();
 
-        modelMapper.map(product, tvBoxResponseDto);
+        modelMapper.map(tvBox, tvBoxResponseDto);
 
         return tvBoxResponseDto;
+    }
+
+    public VacuumCleanerResponseDtoImpl VacuumAsDTO(VacuumCleanerImpl vacuumCleaner) {
+        VacuumCleanerResponseDtoImpl vacuumCleanerResponseDto = new VacuumCleanerResponseDtoImpl();
+
+        modelMapper.map(vacuumCleaner, vacuumCleanerResponseDto);
+
+        return vacuumCleanerResponseDto;
     }
 }

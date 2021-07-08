@@ -3,11 +3,11 @@ package com.example.isandstesttask.controller;
 import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
-import com.example.isandstesttask.entity.reference.Product;
-import com.example.isandstesttask.filter.TvBox.TvBoxSearchCriteria;
-import com.example.isandstesttask.filter.TvBox.TvBoxSearchService;
+import com.example.isandstesttask.filter.tvbox.TvBoxSearchCriteria;
+import com.example.isandstesttask.service.search.TvBoxSearchService;
 import com.example.isandstesttask.service.BrandService;
 import com.example.isandstesttask.service.ColorService;
 import com.example.isandstesttask.service.TvBoxService;
@@ -47,7 +47,7 @@ public class TvBoxController {
 
     @GetMapping(path = "/search/unsorted", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    ResponseEntity<List<Product>> getTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
+    ResponseEntity<List<TvBoxImpl>> getTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
                                                    @RequestParam(required = false) Optional<BigDecimal> maxPrice,
                                                    @RequestParam(required = false) Optional<String> color,
                                                    @RequestParam(required = false) Optional<String> brand,
@@ -62,14 +62,14 @@ public class TvBoxController {
                                                    @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
 
         setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
-        List<Product> tvBoxes = tvBoxSearchService.getUnsortedTvBox(tvBoxSearchCriteria);
+        List<TvBoxImpl> tvBoxes = tvBoxSearchService.getUnsortedTvBox(tvBoxSearchCriteria);
 
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }
 
     @GetMapping(path = "/search/detail_result", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    ResponseEntity<List<Product>> getFilteredTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
+    ResponseEntity<List<TvBoxImpl>> getFilteredTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
                                                    @RequestParam(required = false) Optional<BigDecimal> maxPrice,
                                                    @RequestParam(required = false) Optional<String> color,
                                                    @RequestParam(required = false) Optional<String> brand,
@@ -84,7 +84,7 @@ public class TvBoxController {
                                                    @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
 
         setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
-        List<Product> tvBoxes = tvBoxSearchService.getSortedByNameAscAndPriceDescListTvBox(tvBoxSearchCriteria);
+        List<TvBoxImpl> tvBoxes = tvBoxSearchService.getSortedByNameAscAndPriceDescListTvBox(tvBoxSearchCriteria);
 
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }

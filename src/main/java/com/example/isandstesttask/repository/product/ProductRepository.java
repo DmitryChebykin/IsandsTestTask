@@ -1,6 +1,7 @@
 package com.example.isandstesttask.repository.product;
 
 import com.example.isandstesttask.entity.BaseProductImpl;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -11,5 +12,5 @@ import java.util.UUID;
 @NoRepositoryBean
 public interface ProductRepository<E extends BaseProductImpl> extends JpaRepository<E, UUID>, JpaSpecificationExecutor<E> {
     @Override
-    List<E> findAll(Specification<E> specification);
+    List<E> findAll(Specification<E> specification, Sort sort);
 }

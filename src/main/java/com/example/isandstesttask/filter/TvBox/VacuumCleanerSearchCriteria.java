@@ -1,4 +1,4 @@
-package com.example.isandstesttask.filter.TvBox;
+package com.example.isandstesttask.filter.tvbox;
 
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
+
 @Setter
 @Getter
 public class VacuumCleanerSearchCriteria extends BaseSearchCriteria {

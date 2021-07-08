@@ -1,6 +1,5 @@
-package com.example.isandstesttask.filter.TvBox.metamodel;
+package com.example.isandstesttask.filter.metamodel;
 
-import com.example.isandstesttask.entity.BaseProduct;
 import com.example.isandstesttask.entity.BaseProductImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
@@ -11,19 +10,19 @@ import java.math.BigDecimal;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(BaseProductImpl.class)
-public abstract class BaseProduct_ extends BaseEntity_ {
+public abstract class BaseProductImpl_ extends BaseEntityImpl_ {
 
-	public static volatile SingularAttribute<BaseProduct, String> modelName;
-	public static volatile SingularAttribute<BaseProduct, Color> colorName;
-	public static volatile SingularAttribute<BaseProduct, Brand> brandName;
-	public static volatile SingularAttribute<BaseProduct, String> serialNumber;
-	public static volatile SingularAttribute<BaseProduct, String> size;
-	public static volatile SingularAttribute<BaseProduct, BigDecimal> price;
-	public static volatile SingularAttribute<BaseProduct, String> producingCountry;
-	public static volatile SingularAttribute<BaseProduct, Boolean> available;
-	public static volatile SingularAttribute<BaseProduct, Boolean> isSoldByInstallments;
-	public static volatile SingularAttribute<BaseProduct, Boolean> isOnlineOrdering;
-	public static volatile SingularAttribute<BaseProduct, String> productType;
+	public static volatile SingularAttribute<BaseProductImpl, String> modelName;
+	public static volatile SingularAttribute<BaseProductImpl, Color> colorName;
+	public static volatile SingularAttribute<BaseProductImpl, Brand> brandName;
+	public static volatile SingularAttribute<BaseProductImpl, String> serialNumber;
+	public static volatile SingularAttribute<BaseProductImpl, String> size;
+	public static volatile SingularAttribute<BaseProductImpl, BigDecimal> price;
+	public static volatile SingularAttribute<BaseProductImpl, String> producingCountry;
+	public static volatile SingularAttribute<BaseProductImpl, Boolean> available;
+	public static volatile SingularAttribute<BaseProductImpl, Boolean> isSoldByInstallments;
+	public static volatile SingularAttribute<BaseProductImpl, Boolean> isOnlineOrdering;
+	public static volatile SingularAttribute<BaseProductImpl, String> productType;
 
 	public static final String MODEL_NAME = "modelName";
 	public static final String COLOR_NAME = "colorName";

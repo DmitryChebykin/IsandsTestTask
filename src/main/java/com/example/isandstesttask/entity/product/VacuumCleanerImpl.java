@@ -4,6 +4,7 @@ import com.example.isandstesttask.entity.BaseProduct;
 import com.example.isandstesttask.entity.BaseProductImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
+import com.example.isandstesttask.entity.reference.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

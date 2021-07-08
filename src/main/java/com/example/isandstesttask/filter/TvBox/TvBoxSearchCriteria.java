@@ -1,4 +1,4 @@
-package com.example.isandstesttask.filter.TvBox;
+package com.example.isandstesttask.filter.tvbox;
 
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;

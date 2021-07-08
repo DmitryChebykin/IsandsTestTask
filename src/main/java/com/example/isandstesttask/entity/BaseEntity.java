@@ -1,7 +1,9 @@
 package com.example.isandstesttask.entity;
 
-public interface BaseEntity {
-    void setId(java.util.UUID id);
+import java.util.UUID;
 
-    java.util.UUID getId();
+public interface BaseEntity {
+    void setId( UUID id);
+
+     UUID getId();
 }
