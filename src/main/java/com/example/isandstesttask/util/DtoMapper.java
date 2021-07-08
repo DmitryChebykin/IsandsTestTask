@@ -7,6 +7,8 @@ import com.example.isandstesttask.entity.dto.response.VacuumCleanerResponseDtoIm
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
 import com.example.isandstesttask.entity.reference.Product;
+import com.example.isandstesttask.test.RefrigeratorImpl;
+import com.example.isandstesttask.test.RefrigeratorResponseDtoImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -17,11 +19,11 @@ import org.springframework.stereotype.Service;
 @Getter
 @Setter
 @Service
-public class TvBoxDtoMapper {
+public class DtoMapper {
     private ModelMapper modelMapper;
 
     @Autowired
-    public TvBoxDtoMapper(ModelMapper modelMapper) {
+    public DtoMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
         this.modelMapper.addMappings(new PropertyMap<Product, BaseProductResponseDto>() {
             protected void configure() {
@@ -49,5 +51,13 @@ public class TvBoxDtoMapper {
         modelMapper.map(vacuumCleaner, vacuumCleanerResponseDto);
 
         return vacuumCleanerResponseDto;
+    }
+
+    public RefrigeratorResponseDtoImpl RefAsDTO(RefrigeratorImpl ref) {
+        RefrigeratorResponseDtoImpl refrigeratorResponseDto = new RefrigeratorResponseDtoImpl();
+
+        modelMapper.map(ref, refrigeratorResponseDto);
+
+        return refrigeratorResponseDto;
     }
 }

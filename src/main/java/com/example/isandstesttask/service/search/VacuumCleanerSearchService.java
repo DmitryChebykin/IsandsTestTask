@@ -6,7 +6,7 @@ import com.example.isandstesttask.filter.vacuumcleaner.VacuumCleanerSearchCriter
 import com.example.isandstesttask.filter.vacuumcleaner.VacuumCleanerSpecification;
 import com.example.isandstesttask.repository.product.VacuumCleanerRepository;
 import com.example.isandstesttask.util.SortDirection;
-import com.example.isandstesttask.util.TvBoxDtoMapper;
+import com.example.isandstesttask.util.DtoMapper;
 import com.example.isandstesttask.util.VacuumCleanerSortedFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -19,12 +19,12 @@ import java.util.Optional;
 @Service
 public class VacuumCleanerSearchService {
     private VacuumCleanerRepository vacuumCleanerRepository;
-    private TvBoxDtoMapper tvBoxDtoMapper;
+    private DtoMapper dtoMapper;
 
     @Autowired
-    public VacuumCleanerSearchService(VacuumCleanerRepository vacuumCleanerRepository, TvBoxDtoMapper tvBoxDtoMapper) {
+    public VacuumCleanerSearchService(VacuumCleanerRepository vacuumCleanerRepository, DtoMapper dtoMapper) {
         this.vacuumCleanerRepository = vacuumCleanerRepository;
-        this.tvBoxDtoMapper = tvBoxDtoMapper;
+        this.dtoMapper = dtoMapper;
     }
 
     public VacuumCleanerSearchService() {
@@ -46,7 +46,7 @@ public class VacuumCleanerSearchService {
         for (VacuumCleanerImpl vc : vacuumCleanerList) {
             new VacuumCleanerResponseDtoImpl();
             VacuumCleanerResponseDtoImpl vacuumCleanerResponseDto;
-            vacuumCleanerResponseDto = tvBoxDtoMapper.VacuumAsDTO(vc);
+            vacuumCleanerResponseDto = dtoMapper.VacuumAsDTO(vc);
             all.add(vacuumCleanerResponseDto);
         }
 

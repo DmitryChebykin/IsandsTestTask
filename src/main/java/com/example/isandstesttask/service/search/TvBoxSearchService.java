@@ -6,7 +6,7 @@ import com.example.isandstesttask.filter.tvbox.TvBoxSearchCriteria;
 import com.example.isandstesttask.filter.tvbox.TvSpecification;
 import com.example.isandstesttask.repository.product.TvBoxRepository;
 import com.example.isandstesttask.util.SortDirection;
-import com.example.isandstesttask.util.TvBoxDtoMapper;
+import com.example.isandstesttask.util.DtoMapper;
 import com.example.isandstesttask.util.VacuumCleanerSortedFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -20,12 +20,12 @@ import java.util.Optional;
 public class TvBoxSearchService {
     private TvBoxRepository tvBoxRepository;
 
-    private TvBoxDtoMapper tvBoxDtoMapper;
+    private DtoMapper dtoMapper;
 
     @Autowired
-    public TvBoxSearchService(TvBoxRepository tvBoxRepository, TvBoxDtoMapper tvBoxDtoMapper) {
+    public TvBoxSearchService(TvBoxRepository tvBoxRepository, DtoMapper dtoMapper) {
         this.tvBoxRepository = tvBoxRepository;
-        this.tvBoxDtoMapper = tvBoxDtoMapper;
+        this.dtoMapper = dtoMapper;
     }
 
     public List<TvBoxResponseDtoImpl> getSortedListByNameAscAndPriceDescOfResponseDto(TvBoxSearchCriteria tvBoxSearchCriteria, Optional<VacuumCleanerSortedFields> sortBy, Optional<SortDirection> sortType) {
@@ -43,7 +43,7 @@ public class TvBoxSearchService {
         for (TvBoxImpl tv : all) {
             new TvBoxResponseDtoImpl();
             TvBoxResponseDtoImpl tvBoxResponseDto;
-            tvBoxResponseDto = tvBoxDtoMapper.TvAsDTO(tv);
+            tvBoxResponseDto = dtoMapper.TvAsDTO(tv);
             list.add(tvBoxResponseDto);
         }
         return list;
