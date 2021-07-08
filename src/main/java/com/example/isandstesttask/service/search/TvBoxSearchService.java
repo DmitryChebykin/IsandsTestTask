@@ -5,13 +5,16 @@ import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.filter.tvbox.TvBoxSearchCriteria;
 import com.example.isandstesttask.filter.tvbox.TvSpecification;
 import com.example.isandstesttask.repository.product.TvBoxRepository;
+import com.example.isandstesttask.util.SortDirection;
 import com.example.isandstesttask.util.TvBoxDtoMapper;
+import com.example.isandstesttask.util.VacuumCleanerSortedFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TvBoxSearchService {
@@ -25,22 +28,16 @@ public class TvBoxSearchService {
         this.tvBoxDtoMapper = tvBoxDtoMapper;
     }
 
-    public List<TvBoxImpl> getSortedByNameAscAndPriceDescListTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
-        Specification<TvBoxImpl> baseSpecification = TvSpecification.createBaseSpecifications(tvBoxSearchCriteria);
-        Specification<TvBoxImpl> tvSpecification = TvSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        baseSpecification.and(tvSpecification);
+    public List<TvBoxResponseDtoImpl> getSortedListByNameAscAndPriceDescOfResponseDto(TvBoxSearchCriteria tvBoxSearchCriteria, Optional<VacuumCleanerSortedFields> sortBy, Optional<SortDirection> sortType) {
+        Specification<TvBoxImpl> tvSpecification = TvSpecification.createTvBoxSpecification(tvBoxSearchCriteria);
 
         Sort.TypedSort<TvBoxImpl> tvBoxTypedSort = Sort.sort(TvBoxImpl.class);
-        Sort sort = tvBoxTypedSort
-                .by(TvBoxImpl::getModelName).ascending()
-                .and(tvBoxTypedSort.by(TvBoxImpl::getPrice).descending());
-        List<TvBoxImpl> all = tvBoxRepository.findAll(baseSpecification, sort);
 
-        return all;
-    }
+        Sort sort = sortType.orElse(SortDirection.ASC) == SortDirection.ASC
+                ? tvBoxTypedSort.by(sortBy.orElse(VacuumCleanerSortedFields.MODEL_NAME).getS()).ascending()
+                : tvBoxTypedSort.by(sortBy.orElse(VacuumCleanerSortedFields.MODEL_NAME).getS()).descending();
 
-    public List<TvBoxResponseDtoImpl> getSortedListByNameAscAndPriceDescOfResponseDto(TvBoxSearchCriteria tvBoxSearchCriteria) {
-        List<TvBoxImpl> all = getSortedByNameAscAndPriceDescListTvBox(tvBoxSearchCriteria);
+        List<TvBoxImpl> all = tvBoxRepository.findAll(tvSpecification, sort);
 
         List<TvBoxResponseDtoImpl> list = new ArrayList<>();
         for (TvBoxImpl tv : all) {
@@ -50,11 +47,5 @@ public class TvBoxSearchService {
             list.add(tvBoxResponseDto);
         }
         return list;
-    }
-
-    public List<TvBoxImpl> getUnsortedTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
-        Specification<TvBoxImpl> baseSpecification = TvSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        baseSpecification.and(baseSpecification);
-        return tvBoxRepository.findAll(baseSpecification);
     }
 }

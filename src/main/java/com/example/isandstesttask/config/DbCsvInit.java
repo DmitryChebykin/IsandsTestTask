@@ -36,7 +36,7 @@ public class DbCsvInit {
     }
 
     public void InitDB() {
-        String[] CSV_COLUMNS;
+        String[] CsvColumnHeaders;
 
         ClassLoader loader = DbCsvInit.class.getClassLoader();
         File file = null;
@@ -54,21 +54,21 @@ public class DbCsvInit {
 
         if (csvLines != null) {
             for (int i = 1; i < csvLines.size(); i++) {
-                CSV_COLUMNS = csvLines.get(i)[0].split(";");
+                CsvColumnHeaders = csvLines.get(i)[0].split(";");
 
-                String CATEGORY = CSV_COLUMNS[0];
-                String TECHNOLOGY = CSV_COLUMNS[1];
-                Boolean AVAILABLE = Boolean.valueOf(CSV_COLUMNS[2]);
-                String MODEL = CSV_COLUMNS[4];
-                Boolean ONLINE_ORDER = Boolean.valueOf(CSV_COLUMNS[5]);
-                Boolean SOLD_BY_INSTALMENTS = Boolean.valueOf(CSV_COLUMNS[6]);
-                BigDecimal PRICE = new BigDecimal(CSV_COLUMNS[8]);
-                String COUNTRY = CSV_COLUMNS[9];
-                String SIZE = CSV_COLUMNS[10];
-                String SERIAL = CSV_COLUMNS[11];
+                String CATEGORY = CsvColumnHeaders[0];
+                String TECHNOLOGY = CsvColumnHeaders[1];
+                Boolean AVAILABLE = Boolean.valueOf(CsvColumnHeaders[2]);
+                String MODEL = CsvColumnHeaders[4];
+                Boolean ONLINE_ORDER = Boolean.valueOf(CsvColumnHeaders[5]);
+                Boolean SOLD_BY_INSTALMENTS = Boolean.valueOf(CsvColumnHeaders[6]);
+                BigDecimal PRICE = new BigDecimal(CsvColumnHeaders[8]);
+                String COUNTRY = CsvColumnHeaders[9];
+                String SIZE = CsvColumnHeaders[10];
+                String SERIAL = CsvColumnHeaders[11];
 
-                Brand brand = Brand.BrandBuilder.aBrand().brandName(CSV_COLUMNS[3]).build();
-                Color color = Color.ColorBuilder.aColor().withColorName(CSV_COLUMNS[7]).build();
+                Brand brand = Brand.BrandBuilder.aBrand().brandName(CsvColumnHeaders[3]).build();
+                Color color = Color.ColorBuilder.aColor().withColorName(CsvColumnHeaders[7]).build();
 
                 TvBoxImpl tvBox = getBox(CATEGORY, TECHNOLOGY, AVAILABLE, MODEL, ONLINE_ORDER, SOLD_BY_INSTALMENTS, PRICE, COUNTRY, SIZE, SERIAL, brand, color);
 
@@ -93,7 +93,7 @@ public class DbCsvInit {
 
 
                 if (i % 100 == 0) {
-                    System.out.println("Добавлено строк " + i + " из " + csvLines.size());
+                    System.out.println("Обработано строк " + i + " из " + csvLines.size());
                 }
             }
         }

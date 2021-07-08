@@ -30,7 +30,6 @@ public class VacuumCleanerController {
     private BrandService brandService;
     private ColorService colorService;
 
-
     @Autowired
     public VacuumCleanerController(VacuumCleanerService vacuumCleanerService, VacuumCleanerSearchService vacuumCleanerSearchService, BrandService brandService, ColorService colorService, VacuumCleanerSearchCriteria vacuumCleanerSearchCriteria) {
         this.vacuumCleanerService = vacuumCleanerService;
@@ -47,51 +46,7 @@ public class VacuumCleanerController {
         return new ResponseEntity<>(vacuumCleaner, HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/search/unsorted", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    ResponseEntity<List<VacuumCleanerImpl>> getCleaner(@RequestParam(required = false) Optional<BigDecimal> minPrice,
-                                                       @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-                                                       @RequestParam(required = false) Optional<String> color,
-                                                       @RequestParam(required = false) Optional<String> brand,
-                                                       @RequestParam(required = false) Optional<BigDecimal> DustContainerVolume,
-                                                       @RequestParam(required = false) Optional<String> country,
-                                                       @RequestParam(required = false) Optional<String> serial,
-                                                       @RequestParam(required = false) Optional<String> model,
-                                                       @RequestParam(required = false) Optional<String> size,
-                                                       @RequestParam(required = false) Optional<Integer> ModesNumber,
-                                                       @RequestParam(required = false) Optional<Boolean> available,
-                                                       @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
-                                                       @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
-
-        setCriteria(minPrice, maxPrice, color, brand, DustContainerVolume, country, serial, model, size, ModesNumber, available, isOnlineOrdering, isSoldByInstallments);
-        List<VacuumCleanerImpl> tvBoxes = vacuumCleanerSearchService.getUnsortedTvBox(vacuumCleanerSearchCriteria);
-
-        return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/search/sortByModelAscByPriceDesc/detail_result", produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    ResponseEntity<List<VacuumCleanerImpl>> getFilteredTvBox(@RequestParam(required = false) Optional<BigDecimal> minPrice,
-                                                             @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-                                                             @RequestParam(required = false) Optional<String> color,
-                                                             @RequestParam(required = false) Optional<String> brand,
-                                                             @RequestParam(required = false) Optional<BigDecimal> DustContainerVolume,
-                                                             @RequestParam(required = false) Optional<String> country,
-                                                             @RequestParam(required = false) Optional<String> serial,
-                                                             @RequestParam(required = false) Optional<String> model,
-                                                             @RequestParam(required = false) Optional<String> size,
-                                                             @RequestParam(required = false) Optional<Integer> ModesNumber,
-                                                             @RequestParam(required = false) Optional<Boolean> available,
-                                                             @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
-                                                             @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
-
-        setCriteria(minPrice, maxPrice, color, brand, DustContainerVolume, country, serial, model, size, ModesNumber, available, isOnlineOrdering, isSoldByInstallments);
-        List<VacuumCleanerImpl> tvBoxes = vacuumCleanerSearchService.getSortedByNameAscAndPriceDescListTvBox(vacuumCleanerSearchCriteria);
-
-        return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
-    }
-
-    @GetMapping(path = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/search/sorted", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     ResponseEntity<List<VacuumCleanerResponseDtoImpl>> getFilteredCleanerDto(@RequestParam(required = false) Optional<BigDecimal> minPrice,
                                                                              @RequestParam(required = false) Optional<BigDecimal> maxPrice,

@@ -30,37 +30,17 @@ public class VacuumCleanerSearchService {
     public VacuumCleanerSearchService() {
     }
 
-    public List<VacuumCleanerImpl> getUnsortedTvBox(VacuumCleanerSearchCriteria vacuumCleanerSearchCriteria) {
-        return null;
-    }
-
-    public List<VacuumCleanerImpl> getSortedByNameAscAndPriceDescListTvBox(VacuumCleanerSearchCriteria vacuumCleanerSearchCriteria) {
-        Specification<VacuumCleanerImpl> baseSpecification = VacuumCleanerSpecification.createVacuumCleanerSpecifications(vacuumCleanerSearchCriteria);
-
-        Sort.TypedSort<VacuumCleanerImpl> productTypedSort = Sort.sort(VacuumCleanerImpl.class);
-
-        Sort sort = productTypedSort
-                .by(VacuumCleanerImpl::getModelName).ascending()
-                .and(productTypedSort.by(VacuumCleanerImpl::getPrice).descending());
-
-        List<VacuumCleanerImpl> all = vacuumCleanerRepository.findAll(baseSpecification, sort);
-
-        System.out.println();
-
-        return all;
-    }
-
     public List<VacuumCleanerResponseDtoImpl> getSortedListByNameAscAndPriceDescOfResponseDto(VacuumCleanerSearchCriteria vacuumCleanerSearchCriteria, Optional<VacuumCleanerSortedFields> sortBy, Optional<SortDirection> sortType) {
         Specification<VacuumCleanerImpl> baseSpecification = VacuumCleanerSpecification.createVacuumCleanerSpecifications(vacuumCleanerSearchCriteria);
 
         Sort.TypedSort<VacuumCleanerImpl> productTypedSort = Sort.sort(VacuumCleanerImpl.class);
-        System.out.println();
 
         Sort sort = sortType.orElse(SortDirection.ASC) == SortDirection.ASC
                 ? productTypedSort.by(sortBy.orElse(VacuumCleanerSortedFields.MODEL_NAME).getS()).ascending()
                 : productTypedSort.by(sortBy.orElse(VacuumCleanerSortedFields.MODEL_NAME).getS()).descending();
 
         List<VacuumCleanerImpl> vacuumCleanerList = vacuumCleanerRepository.findAll(baseSpecification, sort);
+
         List<VacuumCleanerResponseDtoImpl> all = new ArrayList();
 
         for (VacuumCleanerImpl vc : vacuumCleanerList) {
@@ -69,6 +49,7 @@ public class VacuumCleanerSearchService {
             vacuumCleanerResponseDto = tvBoxDtoMapper.VacuumAsDTO(vc);
             all.add(vacuumCleanerResponseDto);
         }
+
         return all;
     }
 }
