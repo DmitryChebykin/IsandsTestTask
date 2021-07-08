@@ -1,11 +1,10 @@
-package com.example.isandstesttask.filter;
+package com.example.isandstesttask.filter.vacuumcleaner;
 
 import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.filter.metamodel.BaseProductImpl_;
 import com.example.isandstesttask.filter.metamodel.VacuumCleanerImpl_;
-import com.example.isandstesttask.filter.tvbox.VacuumCleanerSearchCriteria;
 import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -117,8 +116,6 @@ public class VacuumCleanerSpecification {
             }
         };
     }
-
-
 
     private static Specification<VacuumCleanerImpl> modesNumberIs(Optional<Integer> modesNumber) {
         return (root, query, builder) -> modesNumber.map(newTech -> builder.equal(root.get(VacuumCleanerImpl_.MODES_NUMBER), newTech)).orElse(null);

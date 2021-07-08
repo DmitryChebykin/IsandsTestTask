@@ -1,9 +1,11 @@
-package com.example.isandstesttask.filter.metamodel;
+package com.example.isandstesttask.filter.tvbox;
 
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.filter.BaseSearchCriteria;
+import com.example.isandstesttask.filter.metamodel.BaseProductImpl_;
+import com.example.isandstesttask.filter.metamodel.TvBoxImpl_;
 import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;

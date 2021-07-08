@@ -1,4 +1,4 @@
-package com.example.isandstesttask.util.mapper;
+package com.example.isandstesttask.util;
 
 import com.example.isandstesttask.entity.BaseProduct;
 import com.example.isandstesttask.entity.dto.BaseProductResponseDto;

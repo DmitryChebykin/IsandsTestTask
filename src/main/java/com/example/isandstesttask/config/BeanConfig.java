@@ -4,7 +4,7 @@ import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.dto.create.VacuumCleanerCreatingDtoImpl;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.filter.tvbox.TvBoxSearchCriteria;
-import com.example.isandstesttask.filter.tvbox.VacuumCleanerSearchCriteria;
+import com.example.isandstesttask.filter.vacuumcleaner.VacuumCleanerSearchCriteria;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

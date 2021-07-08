@@ -5,11 +5,13 @@ import com.example.isandstesttask.entity.dto.response.VacuumCleanerResponseDtoIm
 import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
-import com.example.isandstesttask.filter.tvbox.VacuumCleanerSearchCriteria;
+import com.example.isandstesttask.filter.vacuumcleaner.VacuumCleanerSearchCriteria;
 import com.example.isandstesttask.service.BrandService;
 import com.example.isandstesttask.service.ColorService;
 import com.example.isandstesttask.service.VacuumCleanerService;
 import com.example.isandstesttask.service.search.VacuumCleanerSearchService;
+import com.example.isandstesttask.util.SortDirection;
+import com.example.isandstesttask.util.VacuumCleanerSortedFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -103,11 +105,13 @@ public class VacuumCleanerController {
                                                                              @RequestParam(required = false) Optional<Integer> modesNumber,
                                                                              @RequestParam(required = false) Optional<Boolean> available,
                                                                              @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
-                                                                             @RequestParam(required = false) Optional<Boolean> isSoldByInstallments) {
+                                                                             @RequestParam(required = false) Optional<Boolean> isSoldByInstallments,
+                                                                             @RequestParam(required = false) Optional<VacuumCleanerSortedFields> sortBy,
+                                                                             @RequestParam(required = false) Optional<SortDirection> sortType) {
 
         setCriteria(minPrice, maxPrice, color, brand, dustContainerVolume, country, serial, model, size, modesNumber, available, isOnlineOrdering, isSoldByInstallments);
 
-        List<VacuumCleanerResponseDtoImpl> tvBoxes = vacuumCleanerSearchService.getSortedListByNameAscAndPriceDescOfResponseDto(vacuumCleanerSearchCriteria);
+        List<VacuumCleanerResponseDtoImpl> tvBoxes = vacuumCleanerSearchService.getSortedListByNameAscAndPriceDescOfResponseDto(vacuumCleanerSearchCriteria, sortBy, sortType);
 
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }

@@ -1,4 +1,4 @@
-package com.example.isandstesttask.filter.tvbox;
+package com.example.isandstesttask.filter.vacuumcleaner;
 
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
