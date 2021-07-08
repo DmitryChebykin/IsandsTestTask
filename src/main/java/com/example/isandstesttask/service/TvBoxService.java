@@ -84,7 +84,6 @@ public class TvBoxService {
         color.setColorName(tvBoxCreatingDtoImpl.getColorName());
         tvBoxBuilder.colorName(color);
 
-        TvBoxImpl tvBox = tvBoxBuilder.build();
-        return tvBox;
+        return tvBoxBuilder.build();
     }
 }

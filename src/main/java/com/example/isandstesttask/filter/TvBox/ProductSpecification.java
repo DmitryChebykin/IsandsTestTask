@@ -5,6 +5,8 @@ import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.entity.reference.Product;
 import com.example.isandstesttask.filter.BaseSearchCriteria;
 import com.example.isandstesttask.filter.TvBox.metamodel.BaseProduct_;
+import com.example.isandstesttask.filter.TvBox.metamodel.TvBox_;
+import com.example.isandstesttask.filter.TvBox.metamodel.VacuumCleanerImpl_;
 import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -14,11 +16,11 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.function.Function;
 
-public final class BaseSpecification {
-    private BaseSpecification() {
+public final class ProductSpecification {
+    private ProductSpecification() {
     }
 
-    public static Specification<Product> createTvBoxSpecifications(BaseSearchCriteria baseSearchCriteria) {
+    public static Specification<Product> createBaseSpecifications(BaseSearchCriteria baseSearchCriteria) {
         Specification<Product> colorSpec = colorIs(baseSearchCriteria.getColorName());
         Specification<Product> brandSpec = brandIs(baseSearchCriteria.getBrandName());
         Specification<Product> sizeSpec = sizeIs(baseSearchCriteria.getSize());
@@ -42,6 +44,23 @@ public final class BaseSpecification {
                 .and(sizeSpec)
                 .and(minPriceSpec)
                 .and(maxPriceSpec);
+    }
+
+    public static Specification<Product> createTvBoxSpecifications(TvBoxSearchCriteria tvBoxSearchCriteria) {
+
+        Specification<Product> categorySpec = categoryIs(tvBoxSearchCriteria.getCategory());
+
+        Specification<Product> techSpec = technologyIs(tvBoxSearchCriteria.getTechnology());
+
+        return categorySpec.and(techSpec);
+    }
+
+    public static Specification<Product> createVacuumCleanerSpecifications(VacuumCleanerSearchCriteria vacuumCleanerSearchCriteria) {
+        Specification<Product> modesNumberSpec = modesNumberIs(vacuumCleanerSearchCriteria.getModesNumber());
+
+        Specification<Product> techSpec = dustContainerVolumeIs(vacuumCleanerSearchCriteria.getDustContainerVolume());
+
+        return modesNumberSpec.and(techSpec);
     }
 
     private static Specification<Product> availableIs(Optional<Boolean> isAvailable) {
@@ -79,7 +98,6 @@ public final class BaseSpecification {
         return (root, query, builder) -> serial.map(newSerial -> builder.equal(root.get(BaseProduct_.SERIAL_NUMBER), newSerial)).orElse(null);
     }
 
-
     private static Specification<Product> countryIs(Optional<String> producingCountry) {
         return (root, query, builder) -> producingCountry.map(new Function<String, Predicate>() {
             @Override
@@ -115,5 +133,21 @@ public final class BaseSpecification {
                 }).orElse(null);
             }
         };
+    }
+
+    private static Specification<Product> technologyIs(Optional<String> technology) {
+        return (root, query, builder) -> technology.map(newTech -> builder.equal(root.get(TvBox_.TECHNOLOGY), newTech)).orElse(null);
+    }
+
+    private static Specification<Product> categoryIs(Optional<String> category) {
+        return (root, query, builder) -> category.map(newCategory -> builder.equal(root.get(TvBox_.CATEGORY), newCategory)).orElse(null);
+    }
+
+    private static Specification<Product> modesNumberIs(Optional<Integer> modesNumber) {
+        return (root, query, builder) -> modesNumber.map(newTech -> builder.equal(root.get(VacuumCleanerImpl_.MODES_NUMBER), newTech)).orElse(null);
+    }
+
+    private static Specification<Product> dustContainerVolumeIs(Optional<BigDecimal> volume) {
+        return (root, query, builder) -> volume.map(newTech -> builder.equal(root.get(VacuumCleanerImpl_.DUST_CONTAINER_VOLUME), newTech)).orElse(null);
     }
 }

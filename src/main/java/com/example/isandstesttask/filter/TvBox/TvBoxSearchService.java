@@ -5,6 +5,7 @@ import com.example.isandstesttask.entity.reference.Product;
 import com.example.isandstesttask.repository.product.ProductRepository;
 import com.example.isandstesttask.util.mapper.TvBoxDtoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -18,15 +19,14 @@ public class TvBoxSearchService {
     private TvBoxDtoMapper tvBoxDtoMapper;
 
     @Autowired
-    public TvBoxSearchService(ProductRepository productRepository, TvBoxDtoMapper tvBoxDtoMapper) {
+    public TvBoxSearchService(@Qualifier("tvBoxRepository") ProductRepository productRepository, TvBoxDtoMapper tvBoxDtoMapper) {
         this.productRepository = productRepository;
         this.tvBoxDtoMapper = tvBoxDtoMapper;
     }
 
     public List getSortedByNameAscAndPriceDescListTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
-        Specification<Product> baseSpecification = BaseSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        Specification<Product> tvBoxSpecification = TvBoxSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        baseSpecification.and(tvBoxSpecification);
+        Specification<Product> baseSpecification = ProductSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
+
         Sort.TypedSort<Product> tvBoxTypedSort = Sort.sort(Product.class);
         Sort sort = tvBoxTypedSort
                 .by(Product::getModelName).ascending()
@@ -48,9 +48,8 @@ public class TvBoxSearchService {
     }
 
     public List<Product> getUnsortedTvBox(TvBoxSearchCriteria tvBoxSearchCriteria) {
-        Specification<Product> baseSpecification = BaseSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        Specification<Product> tvBoxSpecification = TvBoxSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
-        baseSpecification.and(tvBoxSpecification);
+        Specification<Product> baseSpecification = ProductSpecification.createTvBoxSpecifications(tvBoxSearchCriteria);
+        baseSpecification.and(baseSpecification);
         return productRepository.findAll(baseSpecification);
     }
 }

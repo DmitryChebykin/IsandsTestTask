@@ -1,8 +1,10 @@
 package com.example.isandstesttask.config;
 
+import com.example.isandstesttask.controller.VacuumCleanerSearchService;
 import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.filter.TvBox.TvBoxSearchCriteria;
+import com.example.isandstesttask.filter.TvBox.VacuumCleanerSearchCriteria;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,5 +30,11 @@ public class BeanConfig {
     public TvBoxSearchCriteria tvBoxSearchCriteria() {
         return new TvBoxSearchCriteria();
     }
+
+    @Bean
+    public VacuumCleanerSearchCriteria vacuumCleanerSearchCriteria() {
+        return new VacuumCleanerSearchCriteria();
+    }
+
 
 }
