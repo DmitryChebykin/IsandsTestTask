@@ -3,7 +3,6 @@ package com.example.isandstesttask.filter.tvbox;
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
-import com.example.isandstesttask.filter.BaseSearchCriteria;
 import com.example.isandstesttask.filter.metamodel.BaseProductImpl_;
 import com.example.isandstesttask.filter.metamodel.TvBoxImpl_;
 import org.springframework.data.jpa.domain.Specification;
@@ -19,18 +18,20 @@ public final class TvSpecification {
     private TvSpecification() {
     }
 
-    public static Specification<TvBoxImpl> createBaseSpecifications(BaseSearchCriteria baseSearchCriteria) {
-        Specification<TvBoxImpl> colorSpec = colorIs(baseSearchCriteria.getColorName());
-        Specification<TvBoxImpl> brandSpec = brandIs(baseSearchCriteria.getBrandName());
-        Specification<TvBoxImpl> sizeSpec = sizeIs(baseSearchCriteria.getSize());
-        Specification<TvBoxImpl> modelNameSpec = modelIs(baseSearchCriteria.getModelName());
-        Specification<TvBoxImpl> countrySpec = countryIs(baseSearchCriteria.getProducingCountry());
-        Specification<TvBoxImpl> serialSpec = serialIs(baseSearchCriteria.getSerialNumber());
-        Specification<TvBoxImpl> minPriceSpec = hasPriceAbove(baseSearchCriteria.getMinPrice());
-        Specification<TvBoxImpl> maxPriceSpec = hasPriceUnder(baseSearchCriteria.getMaxPrice());
-        Specification<TvBoxImpl> availSpec = availableIs(baseSearchCriteria.getIsAvailable());
-        Specification<TvBoxImpl> onlineOrderingSpec = onlineOrderingIs(baseSearchCriteria.getIsOnlineOrdering());
-        Specification<TvBoxImpl> soldInstalmentsSpec = soldInstalmentsIs(baseSearchCriteria.getIsSoldByInstallments());
+    public static Specification<TvBoxImpl> createTvBoxSpecification(TvBoxSearchCriteria tvBoxSearchCriteria) {
+        Specification<TvBoxImpl> colorSpec = colorIs(tvBoxSearchCriteria.getColorName());
+        Specification<TvBoxImpl> brandSpec = brandIs(tvBoxSearchCriteria.getBrandName());
+        Specification<TvBoxImpl> sizeSpec = sizeIs(tvBoxSearchCriteria.getSize());
+        Specification<TvBoxImpl> modelNameSpec = modelIs(tvBoxSearchCriteria.getModelName());
+        Specification<TvBoxImpl> countrySpec = countryIs(tvBoxSearchCriteria.getProducingCountry());
+        Specification<TvBoxImpl> serialSpec = serialIs(tvBoxSearchCriteria.getSerialNumber());
+        Specification<TvBoxImpl> minPriceSpec = hasPriceAbove(tvBoxSearchCriteria.getMinPrice());
+        Specification<TvBoxImpl> maxPriceSpec = hasPriceUnder(tvBoxSearchCriteria.getMaxPrice());
+        Specification<TvBoxImpl> availSpec = availableIs(tvBoxSearchCriteria.getIsAvailable());
+        Specification<TvBoxImpl> onlineOrderingSpec = onlineOrderingIs(tvBoxSearchCriteria.getIsOnlineOrdering());
+        Specification<TvBoxImpl> soldInstalmentsSpec = soldInstalmentsIs(tvBoxSearchCriteria.getIsSoldByInstallments());
+        Specification<TvBoxImpl> categorySpec = categoryIs(tvBoxSearchCriteria.getCategory());
+        Specification<TvBoxImpl> techSpec = technologyIs(tvBoxSearchCriteria.getTechnology());
 
         return colorSpec
                 .and(brandSpec)
@@ -42,16 +43,9 @@ public final class TvSpecification {
                 .and(serialSpec)
                 .and(sizeSpec)
                 .and(minPriceSpec)
-                .and(maxPriceSpec);
-    }
-
-    public static Specification<TvBoxImpl> createTvBoxSpecifications(com.example.isandstesttask.filter.tvbox.TvBoxSearchCriteria tvBoxSearchCriteria) {
-
-        Specification<TvBoxImpl> categorySpec = categoryIs(tvBoxSearchCriteria.getCategory());
-
-        Specification<TvBoxImpl> techSpec = technologyIs(tvBoxSearchCriteria.getTechnology());
-
-        return categorySpec.and(techSpec);
+                .and(maxPriceSpec)
+                .and(categorySpec)
+                .and(techSpec);
     }
 
     private static Specification<TvBoxImpl> availableIs(Optional<Boolean> isAvailable) {
