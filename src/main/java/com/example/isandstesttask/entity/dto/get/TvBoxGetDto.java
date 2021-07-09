@@ -2,7 +2,6 @@ package com.example.isandstesttask.entity.dto.get;
 
 import com.example.isandstesttask.util.SortDirection;
 import com.example.isandstesttask.util.VacuumCleanerSortedFields;
-import org.springframework.web.bind.annotation.RequestParam;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -23,7 +22,7 @@ public class TvBoxGetDto {
     private final Optional<VacuumCleanerSortedFields> sortBy;
     private final Optional<SortDirection> sortType;
 
-    public TvBoxGetDto(@RequestParam(required = false) Optional<BigDecimal> minPrice, @RequestParam(required = false) Optional<BigDecimal> maxPrice, @RequestParam(required = false) Optional<String> color, @RequestParam(required = false) Optional<String> brand, @RequestParam(required = false) Optional<String> category, @RequestParam(required = false) Optional<String> country, @RequestParam(required = false) Optional<String> serial, @RequestParam(required = false) Optional<String> model, @RequestParam(required = false) Optional<String> size, @RequestParam(required = false) Optional<String> technology, @RequestParam(required = false) Optional<Boolean> available, @RequestParam(required = false) Optional<Boolean> isOnlineOrdering, @RequestParam(required = false) Optional<Boolean> isSoldByInstallments, @RequestParam(required = false) Optional<VacuumCleanerSortedFields> sortBy, @RequestParam(required = false) Optional<SortDirection> sortType) {
+    public TvBoxGetDto(Optional<BigDecimal> minPrice, Optional<BigDecimal> maxPrice, Optional<String> color, Optional<String> brand, Optional<String> category, Optional<String> country, Optional<String> serial, Optional<String> model, Optional<String> size, Optional<String> technology, Optional<Boolean> available, Optional<Boolean> isOnlineOrdering, Optional<Boolean> isSoldByInstallments, Optional<VacuumCleanerSortedFields> sortBy, Optional<SortDirection> sortType) {
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.color = color;
