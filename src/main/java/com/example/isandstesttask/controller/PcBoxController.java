@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/product/PcBox")
+@RequestMapping("/product/pcbox")
 public class PcBoxController {
     private final com.example.isandstesttask.service.PcBoxService PcBoxService;
     private final BrandService brandService;
