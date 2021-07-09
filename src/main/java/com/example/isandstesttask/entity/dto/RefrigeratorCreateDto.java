@@ -8,4 +8,21 @@ public interface RefrigeratorCreateDto extends BaseProductResponseDto {
     Integer getDoorsNumber();
 
     void setDoorsNumber(Integer doorsNumber);
+
+    interface PhoneCreateDto extends BaseProductResponseDto {
+
+        Integer getMemorySize();
+
+        void setMemorySize(Integer memorySize);
+
+        Integer getCamerasNumber();
+
+        void setCamerasNumber(Integer camerasNumber);
+    }
+
+    interface PhoneResponseDto extends IdDto, BaseProductResponseDto, PhoneCreateDto {
+        void setProductType();
+
+        String getProductType();
+    }
 }

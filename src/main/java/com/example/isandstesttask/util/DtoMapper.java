@@ -2,15 +2,15 @@ package com.example.isandstesttask.util;
 
 import com.example.isandstesttask.entity.BaseProduct;
 import com.example.isandstesttask.entity.BaseProductImpl;
-import com.example.isandstesttask.entity.BaseProductImpl_;
 import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
+import com.example.isandstesttask.entity.dto.response.PhoneResponseDtoImpl;
+import com.example.isandstesttask.entity.dto.response.RefrigeratorResponseDtoImpl;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.entity.dto.response.VacuumCleanerResponseDtoImpl;
+import com.example.isandstesttask.entity.product.PhoneImpl;
 import com.example.isandstesttask.entity.product.RefrigeratorImpl;
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
-import com.example.isandstesttask.entity.Product;
- import com.example.isandstesttask.entity.dto.response.RefrigeratorResponseDtoImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -61,5 +61,13 @@ public class DtoMapper<E extends BaseProductImpl> {
         modelMapper.map(ref, refrigeratorResponseDto);
 
         return refrigeratorResponseDto;
+    }
+
+    public PhoneResponseDtoImpl PhoneAsDTO(PhoneImpl phone) {
+        PhoneResponseDtoImpl phoneResponseDtoImpl = new PhoneResponseDtoImpl();
+
+        modelMapper.map(phone, phoneResponseDtoImpl);
+
+        return phoneResponseDtoImpl;
     }
 }

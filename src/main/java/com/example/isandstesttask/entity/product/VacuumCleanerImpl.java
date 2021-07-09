@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
-@Table(name = "vacuum_cleaner", uniqueConstraints = {@UniqueConstraint(name = "serialNumberOfVacuumCleaner", columnNames = {"serial_number"})},
+@Table(name = "vacuum_cleaners", uniqueConstraints = {@UniqueConstraint(name = "serialNumberOfVacuumCleaner", columnNames = {"serial_number"})},
         indexes = {@Index(columnList = "available"),
                 @Index(columnList = "is_sold_by_installments"),
                 @Index(columnList = "is_online_ordering"),

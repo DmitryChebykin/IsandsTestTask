@@ -6,6 +6,7 @@ import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.filter.tvbox.TvBoxSearchCriteria;
 import com.example.isandstesttask.filter.vacuumcleaner.VacuumCleanerSearchCriteria;
 import com.example.isandstesttask.filter.refrigerator.RefrigeratorSearchCriteria;
+import com.example.isandstesttask.filter.phone.PhoneSearchCriteria;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,5 +46,10 @@ public class BeanConfig {
     @Bean
     public RefrigeratorSearchCriteria refrigeratorSearchCriteria() {
         return new RefrigeratorSearchCriteria();
+    }
+
+    @Bean
+    public PhoneSearchCriteria phoneSearchCriteria() {
+        return new PhoneSearchCriteria();
     }
 }

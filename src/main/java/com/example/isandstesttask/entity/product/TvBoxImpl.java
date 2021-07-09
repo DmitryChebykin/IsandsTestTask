@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "tv_box", uniqueConstraints = {@UniqueConstraint(name = "serialNumber", columnNames = {"serial_number"})},
+@Table(name = "tv_boxes", uniqueConstraints = {@UniqueConstraint(name = "serialNumber", columnNames = {"serial_number"})},
         indexes = {@Index(columnList = "available"),
                 @Index(columnList = "is_sold_by_installments"),
                 @Index(columnList = "is_online_ordering"),
