@@ -11,6 +11,8 @@ import com.example.isandstesttask.entity.product.PhoneImpl;
 import com.example.isandstesttask.entity.product.RefrigeratorImpl;
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
+import com.example.isandstesttask.test.PcBoxImpl;
+import com.example.isandstesttask.entity.dto.response.PcBoxResponseDtoImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
@@ -69,5 +71,13 @@ public class DtoMapper<E extends BaseProductImpl> {
         modelMapper.map(phone, phoneResponseDtoImpl);
 
         return phoneResponseDtoImpl;
+    }
+
+    public PcBoxResponseDtoImpl PcBoxAsDTO(PcBoxImpl pcBox) {
+        PcBoxResponseDtoImpl pcBoxResponseDto = new PcBoxResponseDtoImpl();
+
+        modelMapper.map(pcBox, pcBoxResponseDto);
+
+        return pcBoxResponseDto;
     }
 }

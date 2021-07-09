@@ -3,6 +3,7 @@ package com.example.isandstesttask.service.search;
 import com.example.isandstesttask.entity.dto.response.PhoneResponseDtoImpl;
 import com.example.isandstesttask.entity.product.PhoneImpl;
 import com.example.isandstesttask.filter.phone.PhoneSearchCriteria;
+import com.example.isandstesttask.filter.phone.PhoneSpecification;
 import com.example.isandstesttask.repository.product.PhoneRepository;
 import com.example.isandstesttask.util.DtoMapper;
 import com.example.isandstesttask.util.SortDirection;

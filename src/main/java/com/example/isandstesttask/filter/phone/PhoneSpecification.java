@@ -1,4 +1,4 @@
-package com.example.isandstesttask.service.search;
+package com.example.isandstesttask.filter.phone;
 
 import com.example.isandstesttask.entity.product.PhoneImpl;
 import com.example.isandstesttask.entity.reference.Brand;

@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(PhoneImpl.class)
-public abstract class PhoneImpl_ extends com.example.isandstesttask.entity.BaseProductImpl_ {
+public abstract class PhoneImpl_ extends  BaseProductImpl_ {
 
 	public static volatile SingularAttribute<PhoneImpl, Integer> memorySize;
 	public static volatile SingularAttribute<PhoneImpl, Integer> camerasNumber;
