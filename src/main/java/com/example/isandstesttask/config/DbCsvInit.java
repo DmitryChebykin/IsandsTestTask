@@ -11,10 +11,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
@@ -43,9 +43,13 @@ public class DbCsvInit {
         CSVReader csvReader;
         List<String[]> csvLines;
 
+
+        ClassPathResource resource = new ClassPathResource("static/tvBox.csv");
+
         try {
-            file = new File((loader.getResource("static/tvBox.csv")).getFile());
-            csvReader = new CSVReader(new FileReader(file));
+            InputStream inputStream = resource.getInputStream();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            csvReader = new CSVReader(bufferedReader);
             csvLines = csvReader.readAll();
         } catch (Exception e) {
             System.out.println("Csv file read problem, check it correct?");
