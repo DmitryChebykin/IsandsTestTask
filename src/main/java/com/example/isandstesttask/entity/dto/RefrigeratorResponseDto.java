@@ -1,7 +1,4 @@
-package com.example.isandstesttask.test;
-
-import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
-import com.example.isandstesttask.entity.dto.IdDto;
+package com.example.isandstesttask.entity.dto;
 
 public interface RefrigeratorResponseDto extends IdDto, BaseProductResponseDto, RefrigeratorCreateDto {
     void setProductType();

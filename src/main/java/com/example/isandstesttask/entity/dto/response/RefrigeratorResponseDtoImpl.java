@@ -1,4 +1,4 @@
-package com.example.isandstesttask.test;
+package com.example.isandstesttask.entity.dto.response;
 
 import com.example.isandstesttask.entity.dto.TvBoxResponseDto;
 import com.example.isandstesttask.entity.dto.response.BaseProductResponseDtoImpl;

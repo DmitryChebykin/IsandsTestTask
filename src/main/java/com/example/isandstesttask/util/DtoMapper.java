@@ -8,7 +8,7 @@ import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
 import com.example.isandstesttask.entity.reference.Product;
 import com.example.isandstesttask.test.RefrigeratorImpl;
-import com.example.isandstesttask.test.RefrigeratorResponseDtoImpl;
+import com.example.isandstesttask.entity.dto.response.RefrigeratorResponseDtoImpl;
 import lombok.Getter;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;

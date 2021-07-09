@@ -1,6 +1,6 @@
-package com.example.isandstesttask.test;
+package com.example.isandstesttask.entity.dto.create;
 
-import com.example.isandstesttask.entity.dto.create.BaseProductDto;
+import com.example.isandstesttask.entity.dto.RefrigeratorCreateDto;
 import lombok.Getter;
 import lombok.Setter;
 import java.math.BigDecimal;

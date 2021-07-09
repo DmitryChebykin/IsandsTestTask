@@ -1,9 +1,15 @@
-package com.example.isandstesttask.test;
+package com.example.isandstesttask.controller;
 
+import com.example.isandstesttask.entity.dto.create.RefrigeratorCreatingDtoImpl;
+import com.example.isandstesttask.entity.dto.response.RefrigeratorResponseDtoImpl;
+import com.example.isandstesttask.entity.product.Refrigerator;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
+import com.example.isandstesttask.filter.refrigerator.RefrigeratorSearchCriteria;
 import com.example.isandstesttask.service.BrandService;
 import com.example.isandstesttask.service.ColorService;
+import com.example.isandstesttask.service.RefrigeratorService;
+import com.example.isandstesttask.service.search.RefrigeratorSearchService;
 import com.example.isandstesttask.util.SortDirection;
 import com.example.isandstesttask.util.VacuumCleanerSortedFields;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,20 +49,20 @@ public class RefrigeratorController {
     @GetMapping(path = "/search/sorted", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     ResponseEntity<List<RefrigeratorResponseDtoImpl>> getFilteredRefrigeratorDto(@RequestParam(required = false) Optional<BigDecimal> minPrice,
-                                                                   @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-                                                                   @RequestParam(required = false) Optional<String> color,
-                                                                   @RequestParam(required = false) Optional<String> brand,
-                                                                   @RequestParam(required = false) Optional<String> category,
-                                                                   @RequestParam(required = false) Optional<String> country,
-                                                                   @RequestParam(required = false) Optional<String> serial,
-                                                                   @RequestParam(required = false) Optional<String> model,
-                                                                   @RequestParam(required = false) Optional<String> size,
-                                                                   @RequestParam(required = false) Optional<String> technology,
-                                                                   @RequestParam(required = false) Optional<Boolean> available,
-                                                                   @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
-                                                                   @RequestParam(required = false) Optional<Boolean> isSoldByInstallments,
-                                                                   @RequestParam(required = false) Optional<VacuumCleanerSortedFields> sortBy,
-                                                                   @RequestParam(required = false) Optional<SortDirection> sortType) {
+                                                                                 @RequestParam(required = false) Optional<BigDecimal> maxPrice,
+                                                                                 @RequestParam(required = false) Optional<String> color,
+                                                                                 @RequestParam(required = false) Optional<String> brand,
+                                                                                 @RequestParam(required = false) Optional<String> category,
+                                                                                 @RequestParam(required = false) Optional<String> country,
+                                                                                 @RequestParam(required = false) Optional<String> serial,
+                                                                                 @RequestParam(required = false) Optional<String> model,
+                                                                                 @RequestParam(required = false) Optional<String> size,
+                                                                                 @RequestParam(required = false) Optional<String> technology,
+                                                                                 @RequestParam(required = false) Optional<Boolean> available,
+                                                                                 @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
+                                                                                 @RequestParam(required = false) Optional<Boolean> isSoldByInstallments,
+                                                                                 @RequestParam(required = false) Optional<VacuumCleanerSortedFields> sortBy,
+                                                                                 @RequestParam(required = false) Optional<SortDirection> sortType) {
 
         setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
 

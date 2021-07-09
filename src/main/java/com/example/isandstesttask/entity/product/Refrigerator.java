@@ -1,4 +1,4 @@
-package com.example.isandstesttask.test;
+package com.example.isandstesttask.entity.product;
 
 public interface Refrigerator {
 

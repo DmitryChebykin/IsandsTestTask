@@ -1,4 +1,4 @@
-package com.example.isandstesttask.test;
+package com.example.isandstesttask.filter.refrigerator;
 
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;

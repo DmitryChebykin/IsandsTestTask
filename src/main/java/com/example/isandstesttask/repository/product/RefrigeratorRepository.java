@@ -1,5 +1,6 @@
-package com.example.isandstesttask.test;
+package com.example.isandstesttask.repository.product;
 
+import com.example.isandstesttask.test.RefrigeratorImpl;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
