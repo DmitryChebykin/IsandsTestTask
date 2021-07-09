@@ -16,8 +16,10 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.io.*;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Random;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Component
 public class DbCsvInit {
@@ -48,7 +50,7 @@ public class DbCsvInit {
 
         try {
             InputStream inputStream = resource.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream,  StandardCharsets.UTF_8));
             csvReader = new CSVReader(bufferedReader);
             csvLines = csvReader.readAll();
         } catch (Exception e) {
@@ -126,7 +128,7 @@ public class DbCsvInit {
     }
 
     private TvBoxImpl getBox(String CATEGORY, String TECHNOLOGY, Boolean AVAILABLE, String MODEL, Boolean ONLINE_ORDER, Boolean SOLD_BY_INSTALMENTS, BigDecimal PRICE, String COUNTRY, String SIZE, String SERIAL, Brand brand, Color color) {
-        TvBoxImpl tvBox = TvBoxImpl.TvBoxBuilder.aTvBox()
+        return TvBoxImpl.TvBoxBuilder.aTvBox()
                 .category(CATEGORY)
                 .technology(TECHNOLOGY)
                 .available(AVAILABLE)
@@ -140,7 +142,6 @@ public class DbCsvInit {
                 .brandName(brand)
                 .colorName(color)
                 .build();
-        return tvBox;
     }
 
     private String getRandomString() {
