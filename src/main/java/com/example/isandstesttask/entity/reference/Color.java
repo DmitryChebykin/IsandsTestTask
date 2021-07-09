@@ -1,7 +1,9 @@
 package com.example.isandstesttask.entity.reference;
 
 import com.example.isandstesttask.entity.BaseEntityImpl;
+import com.example.isandstesttask.entity.product.RefrigeratorImpl;
 import com.example.isandstesttask.entity.product.TvBoxImpl;
+import com.example.isandstesttask.entity.product.VacuumCleanerImpl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +33,14 @@ public class Color extends BaseEntityImpl {
     @JsonIgnore
     @OneToMany(mappedBy = "colorName", orphanRemoval = true, fetch = FetchType.LAZY)
     private List<TvBoxImpl> tvBoxes;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "colorName", orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<VacuumCleanerImpl> vacuumCleaners;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "colorName", orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<RefrigeratorImpl> refrigerators;
 
     public Color(Timestamp createdDate, Timestamp lastModifiedDate, String colorName) {
         super(createdDate, lastModifiedDate);

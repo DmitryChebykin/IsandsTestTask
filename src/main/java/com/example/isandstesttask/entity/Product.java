@@ -1,4 +1,4 @@
-package com.example.isandstesttask.entity.reference;
+package com.example.isandstesttask.entity;
 
 import com.example.isandstesttask.entity.BaseEntity;
 import com.example.isandstesttask.entity.BaseProduct;

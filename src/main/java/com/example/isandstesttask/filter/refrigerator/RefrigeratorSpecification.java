@@ -1,12 +1,12 @@
 package com.example.isandstesttask.filter.refrigerator;
 
+import com.example.isandstesttask.entity.product.RefrigeratorImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.filter.metamodel.BaseProductImpl_;
 import com.example.isandstesttask.filter.metamodel.RefrigeratorImpl_;
 import com.example.isandstesttask.filter.refrigerator.RefrigeratorSearchCriteria;
-import com.example.isandstesttask.test.RefrigeratorImpl;
-import org.springframework.data.jpa.domain.Specification;
+ import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;

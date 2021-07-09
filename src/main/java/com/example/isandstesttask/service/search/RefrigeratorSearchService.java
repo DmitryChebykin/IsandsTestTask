@@ -1,8 +1,8 @@
 package com.example.isandstesttask.service.search;
 
 
+import com.example.isandstesttask.entity.product.RefrigeratorImpl;
 import com.example.isandstesttask.repository.product.RefrigeratorRepository;
-import com.example.isandstesttask.test.RefrigeratorImpl;
 import com.example.isandstesttask.entity.dto.response.RefrigeratorResponseDtoImpl;
 import com.example.isandstesttask.filter.refrigerator.RefrigeratorSearchCriteria;
 import com.example.isandstesttask.filter.refrigerator.RefrigeratorSpecification;

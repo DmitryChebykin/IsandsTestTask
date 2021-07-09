@@ -1,7 +1,7 @@
 package com.example.isandstesttask.filter.metamodel;
 
-import com.example.isandstesttask.test.RefrigeratorImpl;
-import javax.annotation.Generated;
+ import com.example.isandstesttask.entity.product.RefrigeratorImpl;
+ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 

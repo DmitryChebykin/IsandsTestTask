@@ -1,11 +1,10 @@
-package com.example.isandstesttask.test;
+package com.example.isandstesttask.entity.product;
 
 import com.example.isandstesttask.entity.BaseProduct;
 import com.example.isandstesttask.entity.BaseProductImpl;
-import com.example.isandstesttask.entity.product.Refrigerator;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
-import com.example.isandstesttask.entity.reference.Product;
+import com.example.isandstesttask.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

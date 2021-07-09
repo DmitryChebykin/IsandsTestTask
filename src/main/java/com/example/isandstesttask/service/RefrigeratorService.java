@@ -1,14 +1,14 @@
 package com.example.isandstesttask.service;
 
 import com.example.isandstesttask.entity.product.Refrigerator;
+import com.example.isandstesttask.entity.product.RefrigeratorImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.repository.product.RefrigeratorRepository;
 import com.example.isandstesttask.repository.reference.BrandRepository;
 import com.example.isandstesttask.repository.reference.ColorRepository;
 import com.example.isandstesttask.entity.dto.create.RefrigeratorCreatingDtoImpl;
-import com.example.isandstesttask.test.RefrigeratorImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
