@@ -66,9 +66,9 @@ public class PcBoxController {
 
         setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, processorType, available, isOnlineOrdering, isSoldByInstallments);
 
-        List<PcBoxResponseDtoImpl> PcBoxes = PcBoxSearchService.getSortedListByNameAscAndPriceDescOfResponseDto(pcBoxSearchCriteria, sortBy, sortType);
+        List<PcBoxResponseDtoImpl> pcBoxes = PcBoxSearchService.getSortedListByNameAscAndPriceDescOfResponseDto(pcBoxSearchCriteria, sortBy, sortType);
 
-        return new ResponseEntity<>(PcBoxes, HttpStatus.OK);
+        return new ResponseEntity<>(pcBoxes, HttpStatus.OK);
     }
 
     private void setCriteria(Optional<BigDecimal> minPrice,
