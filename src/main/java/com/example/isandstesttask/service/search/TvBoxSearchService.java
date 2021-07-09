@@ -20,10 +20,10 @@ import java.util.Optional;
 public class TvBoxSearchService {
     private TvBoxRepository tvBoxRepository;
 
-    private DtoMapper dtoMapper;
+    private DtoMapper<TvBoxImpl> dtoMapper;
 
     @Autowired
-    public TvBoxSearchService(TvBoxRepository tvBoxRepository, DtoMapper dtoMapper) {
+    public TvBoxSearchService(TvBoxRepository tvBoxRepository, @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") DtoMapper<TvBoxImpl> dtoMapper) {
         this.tvBoxRepository = tvBoxRepository;
         this.dtoMapper = dtoMapper;
     }

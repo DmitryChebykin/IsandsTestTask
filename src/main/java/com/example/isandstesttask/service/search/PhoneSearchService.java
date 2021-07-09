@@ -20,10 +20,10 @@ import java.util.Optional;
 public class PhoneSearchService {
     private PhoneRepository phoneRepository;
 
-    private DtoMapper dtoMapper;
+    private DtoMapper<PhoneImpl> dtoMapper;
 
     @Autowired
-    public PhoneSearchService(PhoneRepository PhoneRepository, DtoMapper dtoMapper) {
+    public PhoneSearchService(PhoneRepository PhoneRepository, @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") DtoMapper<PhoneImpl> dtoMapper) {
         this.phoneRepository = PhoneRepository;
         this.dtoMapper = dtoMapper;
     }

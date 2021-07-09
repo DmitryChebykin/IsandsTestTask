@@ -19,10 +19,10 @@ import java.util.Optional;
 @Service
 public class VacuumCleanerSearchService {
     private VacuumCleanerRepository vacuumCleanerRepository;
-    private DtoMapper dtoMapper;
+    private DtoMapper<VacuumCleanerImpl> dtoMapper;
 
     @Autowired
-    public VacuumCleanerSearchService(VacuumCleanerRepository vacuumCleanerRepository, DtoMapper dtoMapper) {
+    public VacuumCleanerSearchService(VacuumCleanerRepository vacuumCleanerRepository, @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") DtoMapper<VacuumCleanerImpl> dtoMapper) {
         this.vacuumCleanerRepository = vacuumCleanerRepository;
         this.dtoMapper = dtoMapper;
     }
@@ -41,7 +41,7 @@ public class VacuumCleanerSearchService {
 
         List<VacuumCleanerImpl> vacuumCleanerList = vacuumCleanerRepository.findAll(baseSpecification, sort);
 
-        List<VacuumCleanerResponseDtoImpl> all = new ArrayList();
+        List<VacuumCleanerResponseDtoImpl> all = new ArrayList<>();
 
         for (VacuumCleanerImpl vc : vacuumCleanerList) {
             new VacuumCleanerResponseDtoImpl();

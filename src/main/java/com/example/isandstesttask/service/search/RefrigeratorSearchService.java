@@ -21,10 +21,10 @@ import java.util.Optional;
 public class RefrigeratorSearchService {
     private RefrigeratorRepository refrigeratorRepository;
 
-    private DtoMapper dtoMapper;
+    private DtoMapper<RefrigeratorImpl> dtoMapper;
 
     @Autowired
-    public RefrigeratorSearchService(RefrigeratorRepository refrigeratorRepository, DtoMapper dtoMapper) {
+    public RefrigeratorSearchService(RefrigeratorRepository refrigeratorRepository, @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") DtoMapper<RefrigeratorImpl> dtoMapper) {
         this.refrigeratorRepository = refrigeratorRepository;
         this.dtoMapper = dtoMapper;
     }
