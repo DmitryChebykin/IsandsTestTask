@@ -1,5 +1,6 @@
 package com.example.isandstesttask.controller;
 
+import com.example.isandstesttask.entity.dto.get.PcBoxGetDto;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.filter.pc.PcBoxSearchCriteria;
@@ -10,8 +11,6 @@ import com.example.isandstesttask.service.search.PcBoxSearchService;
 import com.example.isandstesttask.entity.product.PcBox;
 import com.example.isandstesttask.entity.dto.create.PcBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.dto.response.PcBoxResponseDtoImpl;
-import com.example.isandstesttask.util.SortDirection;
-import com.example.isandstesttask.util.VacuumCleanerSortedFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -48,25 +47,11 @@ public class PcBoxController {
 
     @GetMapping(path = "/search/sorted", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    ResponseEntity<List<PcBoxResponseDtoImpl>> getFilteredPcBoxDto(@RequestParam(required = false) Optional<BigDecimal> minPrice,
-                                                                   @RequestParam(required = false) Optional<BigDecimal> maxPrice,
-                                                                   @RequestParam(required = false) Optional<String> color,
-                                                                   @RequestParam(required = false) Optional<String> brand,
-                                                                   @RequestParam(required = false) Optional<String> category,
-                                                                   @RequestParam(required = false) Optional<String> country,
-                                                                   @RequestParam(required = false) Optional<String> serial,
-                                                                   @RequestParam(required = false) Optional<String> model,
-                                                                   @RequestParam(required = false) Optional<String> size,
-                                                                   @RequestParam(required = false) Optional<String> processorType,
-                                                                   @RequestParam(required = false) Optional<Boolean> available,
-                                                                   @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
-                                                                   @RequestParam(required = false) Optional<Boolean> isSoldByInstallments,
-                                                                   @RequestParam(required = false) Optional<VacuumCleanerSortedFields> sortBy,
-                                                                   @RequestParam(required = false) Optional<SortDirection> sortType) {
+    ResponseEntity<List<PcBoxResponseDtoImpl>> getFilteredPcBoxDto(PcBoxGetDto pcBoxGetDto) {
 
-        setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, processorType, available, isOnlineOrdering, isSoldByInstallments);
+        setCriteria(pcBoxGetDto.getMinPrice(), pcBoxGetDto.getMaxPrice(), pcBoxGetDto.getColor(), pcBoxGetDto.getBrand(), pcBoxGetDto.getCategory(), pcBoxGetDto.getCountry(), pcBoxGetDto.getSerial(), pcBoxGetDto.getModel(), pcBoxGetDto.getSize(), pcBoxGetDto.getProcessorType(), pcBoxGetDto.getAvailable(), pcBoxGetDto.getIsOnlineOrdering(), pcBoxGetDto.getIsSoldByInstallments());
 
-        List<PcBoxResponseDtoImpl> pcBoxes = PcBoxSearchService.getSortedListByNameAscAndPriceDescOfResponseDto(pcBoxSearchCriteria, sortBy, sortType);
+        List<PcBoxResponseDtoImpl> pcBoxes = PcBoxSearchService.getSortedListByNameAscAndPriceDescOfResponseDto(pcBoxSearchCriteria, pcBoxGetDto.getSortBy(), pcBoxGetDto.getSortType());
 
         return new ResponseEntity<>(pcBoxes, HttpStatus.OK);
     }
