@@ -64,14 +64,14 @@ public class RefrigeratorService {
     }
 
     private RefrigeratorImpl getRefrigerator(RefrigeratorCreatingDtoImpl refrigeratorCreatingDtoImpl) {
-        RefrigeratorImpl.RefrigeratorBuilder refrigeratorBuilder = RefrigeratorImpl.RefrigeratorBuilder.aRefrigerator()
+        RefrigeratorImpl.RefrigeratorImplBuilder  refrigeratorBuilder = RefrigeratorImpl.RefrigeratorImplBuilder.aRefrigeratorImpl()
                 .producingCountry(refrigeratorCreatingDtoImpl.getProducingCountry())
-                .category(refrigeratorCreatingDtoImpl.getCategory())
+                .compressorType(refrigeratorCreatingDtoImpl.getCompressorType())
                 .modelName(refrigeratorCreatingDtoImpl.getModelName())
                 .price(refrigeratorCreatingDtoImpl.getPrice())
                 .serialNumber(refrigeratorCreatingDtoImpl.getSerialNumber())
                 .size(refrigeratorCreatingDtoImpl.getSize())
-                .technology(refrigeratorCreatingDtoImpl.getTechnology())
+                .doorsNumber(refrigeratorCreatingDtoImpl.getDoorsNumber())
                 .isOnlineOrdering(refrigeratorCreatingDtoImpl.getIsOnlineOrdering())
                 .isSoldByInstallments(refrigeratorCreatingDtoImpl.getIsSoldByInstallments())
                 .available(refrigeratorCreatingDtoImpl.getAvailable());

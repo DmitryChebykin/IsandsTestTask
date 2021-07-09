@@ -17,8 +17,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RefrigeratorSearchCriteria extends BaseSearchCriteria {
-    private Optional<String> category;
-    private Optional<String> technology;
+    private Optional<String> compressorType;
+    private Optional<Integer> doorsNumber;
 
     public static final class RefrigeratorSearchCriteriaBuilder {
         private Optional<UUID> id;
@@ -33,8 +33,8 @@ public class RefrigeratorSearchCriteria extends BaseSearchCriteria {
         private Optional<BigDecimal> maxPrice;
         private Optional<BigDecimal> minPrice;
         private Optional<String> size;
-        private Optional<String> category;
-        private Optional<String> technology;
+        private Optional<String> compressorType;
+        private Optional<Integer> doorsNumber;
 
         private RefrigeratorSearchCriteriaBuilder() {
         }
@@ -103,13 +103,13 @@ public class RefrigeratorSearchCriteria extends BaseSearchCriteria {
             return this;
         }
 
-        public RefrigeratorSearchCriteriaBuilder category(Optional<String> category) {
-            this.category = category;
+        public RefrigeratorSearchCriteriaBuilder compressorType(Optional<String> compressorType) {
+            this.compressorType = compressorType;
             return this;
         }
 
-        public RefrigeratorSearchCriteriaBuilder technology(Optional<String> technology) {
-            this.technology = technology;
+        public RefrigeratorSearchCriteriaBuilder doorsNumber(Optional<Integer> doorsNumber) {
+            this.doorsNumber = doorsNumber;
             return this;
         }
 
@@ -127,8 +127,8 @@ public class RefrigeratorSearchCriteria extends BaseSearchCriteria {
             refrigeratorSearchCriteria.setMaxPrice(maxPrice);
             refrigeratorSearchCriteria.setMinPrice(minPrice);
             refrigeratorSearchCriteria.setSize(size);
-            refrigeratorSearchCriteria.setCategory(category);
-            refrigeratorSearchCriteria.setTechnology(technology);
+            refrigeratorSearchCriteria.setCompressorType(compressorType);
+            refrigeratorSearchCriteria.setDoorsNumber(doorsNumber);
             return refrigeratorSearchCriteria;
         }
     }

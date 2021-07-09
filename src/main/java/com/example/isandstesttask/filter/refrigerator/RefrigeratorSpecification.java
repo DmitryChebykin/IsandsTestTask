@@ -5,8 +5,7 @@ import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.filter.metamodel.BaseProductImpl_;
 import com.example.isandstesttask.filter.metamodel.RefrigeratorImpl_;
-import com.example.isandstesttask.filter.refrigerator.RefrigeratorSearchCriteria;
- import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -19,20 +18,20 @@ public final class RefrigeratorSpecification {
     private RefrigeratorSpecification() {
     }
 
-    public static Specification<RefrigeratorImpl> createRefrigeratorSpecification(RefrigeratorSearchCriteria tvBoxSearchCriteria) {
-        Specification<RefrigeratorImpl> colorSpec = colorIs(tvBoxSearchCriteria.getColorName());
-        Specification<RefrigeratorImpl> brandSpec = brandIs(tvBoxSearchCriteria.getBrandName());
-        Specification<RefrigeratorImpl> sizeSpec = sizeIs(tvBoxSearchCriteria.getSize());
-        Specification<RefrigeratorImpl> modelNameSpec = modelIs(tvBoxSearchCriteria.getModelName());
-        Specification<RefrigeratorImpl> countrySpec = countryIs(tvBoxSearchCriteria.getProducingCountry());
-        Specification<RefrigeratorImpl> serialSpec = serialIs(tvBoxSearchCriteria.getSerialNumber());
-        Specification<RefrigeratorImpl> minPriceSpec = hasPriceAbove(tvBoxSearchCriteria.getMinPrice());
-        Specification<RefrigeratorImpl> maxPriceSpec = hasPriceUnder(tvBoxSearchCriteria.getMaxPrice());
-        Specification<RefrigeratorImpl> availSpec = availableIs(tvBoxSearchCriteria.getIsAvailable());
-        Specification<RefrigeratorImpl> onlineOrderingSpec = onlineOrderingIs(tvBoxSearchCriteria.getIsOnlineOrdering());
-        Specification<RefrigeratorImpl> soldInstalmentsSpec = soldInstalmentsIs(tvBoxSearchCriteria.getIsSoldByInstallments());
-        Specification<RefrigeratorImpl> categorySpec = categoryIs(tvBoxSearchCriteria.getCategory());
-        Specification<RefrigeratorImpl> techSpec = technologyIs(tvBoxSearchCriteria.getTechnology());
+    public static Specification<RefrigeratorImpl> createRefrigeratorSpecification(RefrigeratorSearchCriteria refrigeratorSearchCriteria) {
+        Specification<RefrigeratorImpl> colorSpec = colorIs(refrigeratorSearchCriteria.getColorName());
+        Specification<RefrigeratorImpl> brandSpec = brandIs(refrigeratorSearchCriteria.getBrandName());
+        Specification<RefrigeratorImpl> sizeSpec = sizeIs(refrigeratorSearchCriteria.getSize());
+        Specification<RefrigeratorImpl> modelNameSpec = modelIs(refrigeratorSearchCriteria.getModelName());
+        Specification<RefrigeratorImpl> countrySpec = countryIs(refrigeratorSearchCriteria.getProducingCountry());
+        Specification<RefrigeratorImpl> serialSpec = serialIs(refrigeratorSearchCriteria.getSerialNumber());
+        Specification<RefrigeratorImpl> minPriceSpec = hasPriceAbove(refrigeratorSearchCriteria.getMinPrice());
+        Specification<RefrigeratorImpl> maxPriceSpec = hasPriceUnder(refrigeratorSearchCriteria.getMaxPrice());
+        Specification<RefrigeratorImpl> availSpec = availableIs(refrigeratorSearchCriteria.getIsAvailable());
+        Specification<RefrigeratorImpl> onlineOrderingSpec = onlineOrderingIs(refrigeratorSearchCriteria.getIsOnlineOrdering());
+        Specification<RefrigeratorImpl> soldInstalmentsSpec = soldInstalmentsIs(refrigeratorSearchCriteria.getIsSoldByInstallments());
+        Specification<RefrigeratorImpl> compressorTypeSpec = compressorTypeIs(refrigeratorSearchCriteria.getCompressorType());
+        Specification<RefrigeratorImpl> doorsNumberSpec = doorsNumberIs(refrigeratorSearchCriteria.getDoorsNumber());
 
         return colorSpec
                 .and(brandSpec)
@@ -45,8 +44,8 @@ public final class RefrigeratorSpecification {
                 .and(sizeSpec)
                 .and(minPriceSpec)
                 .and(maxPriceSpec)
-                .and(categorySpec)
-                .and(techSpec);
+                .and(compressorTypeSpec)
+                .and(doorsNumberSpec);
     }
 
     private static Specification<RefrigeratorImpl> availableIs(Optional<Boolean> isAvailable) {
@@ -121,11 +120,11 @@ public final class RefrigeratorSpecification {
         };
     }
 
-    private static Specification<RefrigeratorImpl> technologyIs(Optional<String> technology) {
-        return (root, query, builder) -> technology.map(newTech -> builder.equal(root.get(com.example.isandstesttask.filter.metamodel.RefrigeratorImpl_.TECHNOLOGY), newTech)).orElse(null);
+    private static Specification<RefrigeratorImpl> doorsNumberIs(Optional<Integer> doorsNumber) {
+        return (root, query, builder) -> doorsNumber.map(newTech -> builder.equal(root.get(RefrigeratorImpl_.DOORS_NUMBER), newTech)).orElse(null);
     }
 
-    private static Specification<RefrigeratorImpl> categoryIs(Optional<String> category) {
-        return (root, query, builder) -> category.map(newCategory -> builder.equal(root.get(RefrigeratorImpl_.CATEGORY), newCategory)).orElse(null);
+    private static Specification<RefrigeratorImpl> compressorTypeIs(Optional<String> compressorType) {
+        return (root, query, builder) -> compressorType.map(newCategory -> builder.equal(root.get(RefrigeratorImpl_.COMPRESSOR_TYPE), newCategory)).orElse(null);
     }
 }

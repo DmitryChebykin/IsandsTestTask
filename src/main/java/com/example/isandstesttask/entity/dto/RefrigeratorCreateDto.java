@@ -1,13 +1,11 @@
 package com.example.isandstesttask.entity.dto;
 
-import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
-
 public interface RefrigeratorCreateDto extends BaseProductResponseDto {
-    String getCategory();
+    String getCompressorType();
 
-    void setCategory(String category);
+    void setCompressorType(String compressorType);
 
-    String getTechnology();
+    Integer getDoorsNumber();
 
-    void setTechnology(String technology);
+    void setDoorsNumber(Integer doorsNumber);
 }

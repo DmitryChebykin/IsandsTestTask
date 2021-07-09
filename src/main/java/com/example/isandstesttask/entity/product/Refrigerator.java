@@ -2,13 +2,10 @@ package com.example.isandstesttask.entity.product;
 
 public interface Refrigerator {
 
-    String getProductType();
+    String getCompressorType();
 
-    String getCategory();
+    void setCompressorType(String compressorType);
 
-    void setCategory(String category);
+    Integer getDoorsNumber();
 
-    String getTechnology();
-
-    void setTechnology(String technology);
-}
+    void setDoorsNumber(Integer doorsNumber);}

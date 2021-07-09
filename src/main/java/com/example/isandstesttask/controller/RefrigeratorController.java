@@ -54,17 +54,17 @@ public class RefrigeratorController {
                                                                                  @RequestParam(required = false) Optional<String> brand,
                                                                                  @RequestParam(required = false) Optional<String> category,
                                                                                  @RequestParam(required = false) Optional<String> country,
-                                                                                 @RequestParam(required = false) Optional<String> serial,
+                                                                                 @RequestParam(required = false) Optional<String> compressorType,
                                                                                  @RequestParam(required = false) Optional<String> model,
                                                                                  @RequestParam(required = false) Optional<String> size,
-                                                                                 @RequestParam(required = false) Optional<String> technology,
+                                                                                 @RequestParam(required = false) Optional<Integer> doorsNumber,
                                                                                  @RequestParam(required = false) Optional<Boolean> available,
                                                                                  @RequestParam(required = false) Optional<Boolean> isOnlineOrdering,
                                                                                  @RequestParam(required = false) Optional<Boolean> isSoldByInstallments,
                                                                                  @RequestParam(required = false) Optional<VacuumCleanerSortedFields> sortBy,
                                                                                  @RequestParam(required = false) Optional<SortDirection> sortType) {
 
-        setCriteria(minPrice, maxPrice, color, brand, category, country, serial, model, size, technology, available, isOnlineOrdering, isSoldByInstallments);
+        setCriteria(minPrice, maxPrice, color, brand, category, country, compressorType, model, size, doorsNumber, available, isOnlineOrdering, isSoldByInstallments);
 
         List<RefrigeratorResponseDtoImpl> refrigeratores = refrigeratorSearchService.getSortedListByNameAscAndPriceDescOfResponseDto(refrigeratorSearchCriteria, sortBy, sortType);
 
@@ -75,12 +75,12 @@ public class RefrigeratorController {
                              Optional<BigDecimal> maxPrice,
                              Optional<String> color,
                              Optional<String> brand,
-                             Optional<String> category,
+                             Optional<String> compressorType,
                              Optional<String> country,
                              Optional<String> serial,
                              Optional<String> model,
                              Optional<String> size,
-                             Optional<String> technology,
+                             Optional<Integer> doorsNumber,
                              Optional<Boolean> available,
                              Optional<Boolean> isOnlineOrdering,
                              Optional<Boolean> isSoldByInstallments) {
@@ -88,7 +88,7 @@ public class RefrigeratorController {
 
         Optional<Color> optionalColor = Optional.ofNullable(colorService.getColorByName(color.orElse(null)));
 
-        refrigeratorSearchCriteria = RefrigeratorSearchCriteria.RefrigeratorSearchCriteriaBuilder.aRefrigeratorSearchCriteria().category(category)
+        refrigeratorSearchCriteria = RefrigeratorSearchCriteria.RefrigeratorSearchCriteriaBuilder.aRefrigeratorSearchCriteria().compressorType(compressorType)
                 .brandName(optionalBrand)
                 .colorName(optionalColor)
                 .minPrice(minPrice)
@@ -97,7 +97,7 @@ public class RefrigeratorController {
                 .serialNumber(serial)
                 .modelName(model)
                 .size(size)
-                .technology(technology)
+                .doorsNumber(doorsNumber)
                 .isAvailable(available)
                 .isOnlineOrdering(isOnlineOrdering)
                 .isSoldByInstallments(isSoldByInstallments)

@@ -8,13 +8,13 @@ import java.math.BigDecimal;
 @Setter
 @Getter
 public class RefrigeratorCreatingDtoImpl extends BaseProductDto implements RefrigeratorCreateDto {
-    private String category;
-    private String technology;
+    private String compressorType;
+    private Integer doorsNumber;
 
-    public RefrigeratorCreatingDtoImpl(String productType, String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size, String category, String technology) {
+    public RefrigeratorCreatingDtoImpl(String producingCountry, String brandName, boolean isOnlineOrdering, boolean isSoldByInstallments, boolean isAvailable, String modelName, String serialNumber, String colorName, BigDecimal price, String size, String compressorType, Integer doorsNumber) {
         super(producingCountry, brandName, isOnlineOrdering, isSoldByInstallments, isAvailable, modelName, serialNumber, colorName, price, size);
-        this.category = category;
-        this.technology = technology;
+        this.compressorType = compressorType;
+        this.doorsNumber = doorsNumber;
     }
 
     public RefrigeratorCreatingDtoImpl() {

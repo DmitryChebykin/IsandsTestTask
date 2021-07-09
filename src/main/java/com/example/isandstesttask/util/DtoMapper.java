@@ -1,6 +1,8 @@
 package com.example.isandstesttask.util;
 
 import com.example.isandstesttask.entity.BaseProduct;
+import com.example.isandstesttask.entity.BaseProductImpl;
+import com.example.isandstesttask.entity.BaseProductImpl_;
 import com.example.isandstesttask.entity.dto.BaseProductResponseDto;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
 import com.example.isandstesttask.entity.dto.response.VacuumCleanerResponseDtoImpl;
@@ -19,13 +21,13 @@ import org.springframework.stereotype.Service;
 @Getter
 @Setter
 @Service
-public class DtoMapper {
+public class DtoMapper<E extends BaseProductImpl> {
     private ModelMapper modelMapper;
 
     @Autowired
     public DtoMapper(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
-        this.modelMapper.addMappings(new PropertyMap<Product, BaseProductResponseDto>() {
+        this.modelMapper.addMappings(new PropertyMap<E, BaseProductResponseDto>() {
             protected void configure() {
                 map().setBrandName(source.getBrandName().getBrandName());
             }
