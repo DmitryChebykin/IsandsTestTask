@@ -14,5 +14,7 @@ import java.util.UUID;
 public interface TvBoxRepository extends JpaRepository<TvBoxImpl, UUID>, JpaSpecificationExecutor<TvBoxImpl> {
     Optional<TvBoxImpl> findBySerialNumber(String serialNumber);
 
+    Optional<TvBoxImpl> findById(UUID id);
+
     List<TvBoxImpl> findAll(Specification<TvBoxImpl> baseSpecification, Sort sort);
 }

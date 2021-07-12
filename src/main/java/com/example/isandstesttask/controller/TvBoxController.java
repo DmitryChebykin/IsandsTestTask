@@ -3,7 +3,9 @@ package com.example.isandstesttask.controller;
 import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
 import com.example.isandstesttask.entity.dto.get.TvBoxGetDto;
 import com.example.isandstesttask.entity.dto.response.TvBoxResponseDtoImpl;
+import com.example.isandstesttask.entity.dto.update.TvBoxUpdateDto;
 import com.example.isandstesttask.entity.product.TvBox;
+import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
 import com.example.isandstesttask.entity.reference.Color;
 import com.example.isandstesttask.filter.tvbox.TvBoxSearchCriteria;
@@ -16,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,6 +46,13 @@ public class TvBoxController {
         return new ResponseEntity<>(tvBox, HttpStatus.CREATED);
     }
 
+    @PatchMapping(path = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<TvBoxImpl> getUpdatedTvBoxDto(@RequestBody TvBoxUpdateDto tvBoxUpdateDto) {
+        Optional<TvBoxImpl> updatedTvBox = tvBoxService.getUpdatedTvBox(tvBoxUpdateDto);
+        TvBoxImpl tvBox = updatedTvBox.orElse(null);
+        return new ResponseEntity<>(tvBox, HttpStatus.OK);
+    }
+
     @GetMapping(path = "/search/sorted", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     ResponseEntity<List<TvBoxResponseDtoImpl>> getFilteredTvBoxDto(TvBoxGetDto tvBoxGetDto) {
@@ -55,7 +63,7 @@ public class TvBoxController {
         return new ResponseEntity<>(tvBoxes, HttpStatus.OK);
     }
 
-     private void setCriteria(TvBoxGetDto tvBoxGetDto) {
+    private void setCriteria(TvBoxGetDto tvBoxGetDto) {
         Optional<Brand> optionalBrand = Optional.ofNullable(brandService.getBrandByName(tvBoxGetDto.getBrand().orElse(null)));
 
         Optional<Color> optionalColor = Optional.ofNullable(colorService.getColorByName(tvBoxGetDto.getColor().orElse(null)));

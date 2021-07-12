@@ -1,6 +1,7 @@
 package com.example.isandstesttask.service;
 
 import com.example.isandstesttask.entity.dto.create.TvBoxCreatingDtoImpl;
+import com.example.isandstesttask.entity.dto.update.TvBoxUpdateDto;
 import com.example.isandstesttask.entity.product.TvBox;
 import com.example.isandstesttask.entity.product.TvBoxImpl;
 import com.example.isandstesttask.entity.reference.Brand;
@@ -17,7 +18,7 @@ import java.util.UUID;
 
 @Service
 public class TvBoxService {
-@Resource
+    @Resource
     private TvBoxRepository tvBoxRepository;
     private BrandRepository brandRepository;
     private ColorRepository colorRepository;
@@ -85,5 +86,30 @@ public class TvBoxService {
         tvBoxBuilder.colorName(color);
 
         return tvBoxBuilder.build();
+    }
+
+    public Optional<TvBoxImpl> getUpdatedTvBox(TvBoxUpdateDto tvBoxUpdateDto) {
+        Optional<TvBoxImpl> optionalTvBoxImpl = tvBoxRepository.findById(tvBoxUpdateDto.getId());
+        if (optionalTvBoxImpl.isPresent()) {
+            updateTvBoxImpl(tvBoxUpdateDto, optionalTvBoxImpl.get());
+            return Optional.of(tvBoxRepository.save(optionalTvBoxImpl.get()));
+        }
+        return optionalTvBoxImpl;
+    }
+
+    private void updateTvBoxImpl(TvBoxUpdateDto tvBoxUpdateDto, TvBoxImpl tvBoxImpl) {
+        tvBoxUpdateDto.getPrice().ifPresent(tvBoxImpl::setPrice);
+        tvBoxUpdateDto.getCountry().ifPresent(tvBoxImpl::setProducingCountry);
+        tvBoxUpdateDto.getCategory().ifPresent(tvBoxImpl::setCategory);
+        tvBoxUpdateDto.getSerial().ifPresent(tvBoxImpl::setSerialNumber);
+        tvBoxUpdateDto.getModel().ifPresent(tvBoxImpl::setModelName);
+        tvBoxUpdateDto.getSize().ifPresent(tvBoxImpl::setSize);
+        tvBoxUpdateDto.getTechnology().ifPresent(tvBoxImpl::setTechnology);
+        tvBoxUpdateDto.getAvailable().ifPresent(tvBoxImpl::setAvailable);
+        tvBoxUpdateDto.getIsOnlineOrdering().ifPresent(tvBoxImpl::setIsOnlineOrdering);
+        tvBoxUpdateDto.getIsSoldByInstallments().ifPresent(tvBoxImpl::setIsSoldByInstallments);
+
+        tvBoxUpdateDto.getColor().ifPresent(property -> tvBoxImpl.setColorName(colorRepository.findByColorName(property).orElse(Color.ColorBuilder.aColor().withColorName(property).build())));
+        tvBoxUpdateDto.getBrand().ifPresent(property -> tvBoxImpl.setBrandName(brandRepository.findByBrandName(property).orElse(Brand.BrandBuilder.aBrand().brandName(property).build())));
     }
 }
